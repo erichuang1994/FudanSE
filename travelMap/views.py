@@ -5,10 +5,7 @@ from travelMap import models
 # Create your views here.
 
 def index(request):
-    if request.method == "GET":
-        # TODO
-    elif request.method == "POST":
-        # TODO
+    # TODO
 
 def signup(request):
     if request.method == "GET":

@@ -42,19 +42,26 @@
 11. Followed list
   * List
 
-## URL
-* http://DOMAIN
-* http://DOMAIN/signup
-* http://DOMAIN/login
-* http://DOMAIN/logout
-* http://DOMAIN/setting
-* http://DOMAIN/visit
-* http://DOMAIN/upload
-* http://DOMAIN/follow
-* http://DOMAIN/unfollow
-* http://DOMAIN/USER
-* http://DOMAIN/USER/CITY
-* http://DOMAIN/USER/CITY/PICTURE
-* http://DOMAIN/USER/followers
-* http://DOMAIN/USER/following
+## API
+| Description | HTTP Method | URL | Parameters  |
+| --- | --- | --- | --- |
+| Homepage | GET | / | |
+| Page to signup | GET | /signup | |
+| Signup | POST | /signup | username, password, email |
+| Page to login | GET | /login | |
+| Login | POST | /login | username, password |
+| Logout | GET | /logout | |
+| Setting page | GET | /setting | |
+| Modify user information | POST | /setting | username, password, email |
+| Page to add visited city | GET | /visit | |
+| Add visited city | POST | /visit | city name |
+| Page to upload picture | GET | /upload | |
+| Upload picture | POST | /upload | image file |
+| Follow someone | POST | /follow | username |
+| Unfollow someone | POST | /unfollow | username |
+| Map of the user | GET | /USERNAME | |
+| Pictures of the city | GET | /USERNAME/CITY | |
+| Information of the picture | GET | /USERNAME/CITY/PICTURE | |
+| Page of followers | GET | /USER/followers | |
+| Page of following | GET | /USER/followering | |
 
