@@ -12,6 +12,9 @@ var News = React.createClass({
 	editfunc:function(num){
 		this.setState({edit:true, curNum:num});
 	},
+	cancelEditfunc:function(num){
+		this.setState({edit:false});
+	},
 	render:function(){
 		if(this.state.edit){
 			var style1={
@@ -29,7 +32,7 @@ var News = React.createClass({
 							<a href="javascript:;"  className="line-bottom" >
 								<span>删除</span>
 							</a>
-							<a className="close line-top" href="javascript:;">
+							<a className="close line-top" href="javascript:;" onClick={this.cancelEditfunc}>
 								<span>取消</span>
 							</a>
 						</section>
