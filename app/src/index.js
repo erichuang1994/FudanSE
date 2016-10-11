@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
-import News from './News';
-import Topbar from './Topbar';
-import './index.css';
+import App from './App';
 var NewsData = function(id){return {
   userlink:"u/12345",
   id:id,
@@ -15,8 +12,6 @@ var NewsData = function(id){return {
 	//countLike	: 0;
 	//countComment : 0;
 }};
-
-//	for demo
 var news1 = NewsData(1);
 var news2 = NewsData(2);
 var news3 = NewsData(3);
@@ -24,10 +19,6 @@ var news = [news1, news2, news3];
 var genMenus = function(name,href){return {name:name,href:href}};
 var menus = [genMenus("广场","news"),genMenus("消息","messgae")];
 ReactDOM.render(
-  <Topbar menus={menus}/>,
+  <App datas={{'menus':menus,'news':news}}/>,
   document.getElementById('root')
-);
-ReactDOM.render(
-	<News data={news}></News>,
-	document.getElementById('content')
 );
