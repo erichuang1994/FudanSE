@@ -8,7 +8,7 @@ var App = React.createClass({
      this.setState({islogin: true});
   },
   getInitialState: function() {
-    return { islogin: false };
+    return { islogin: false, pageNum:0 };
 
   },
   render: function() {
@@ -16,7 +16,11 @@ var App = React.createClass({
         return (
           <div>
           <Topbar menus={this.props.datas['menus']}/>
-          <News data={this.props.datas['news']}></News>
+          {(() => {
+            switch (this.state.pageNum) {
+              case 0:   return <News data={this.props.datas['news']}></News>;
+            }
+          })()}
           </div>
         );
     }else{
