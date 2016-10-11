@@ -8,7 +8,7 @@
 
 * Traveller(**tid**, username, password, email)
 * City(**cid**, name)
-* Picture(**pid**, description, good, time, file, tid, cid)
+* Picture(**pid**, description, like\_count, time, file, tid, cid)
 * Message(**mid**, content, time, tid, pid)
 * Visit(**tid**, **cid**)
 * Follow(**tid1**, **tid2**)
