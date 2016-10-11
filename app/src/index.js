@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './App';
-import News from './News'
-import Topbar from './Topbar'
+import News from './News';
+import Topbar from './Topbar';
 import './index.css';
 var NewsData = function(id){return {
   userlink:"u/12345",
