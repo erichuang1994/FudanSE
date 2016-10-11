@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import 'purecss';
-
+import './base.css'
+import './mods.css'
 class Topbar extends Component {
   render() {
+    var setPageNum = this.props.setPageNum;
     return (
-      <div className="pure-menu pure-menu-horizontal">
-          <a href="#" className="pure-menu-heading pure-menu-link">BRAND</a>
-          <ul className="pure-menu-list">
+      <div className="home-sub-nav layout-box">
           {
             this.props.menus.map(function(menu) {
+              if(menu.isactive){
               return (
-              <li key={menu.name} className="pure-menu-item"><a href="{menu.href}" className="pure-menu-link">{menu.name}</a></li>
+                <a href="javascript:;" className="item box-col isActive" onClick={setPageNum(menu.num)}>{menu.name}</a>
               );
+            }else{
+              return (
+                <a href="javascript:;" className="item box-col" onClick={setPageNum(menu.num)}>{menu.name}</a>
+              );
+            }
             })
           }
-          </ul>
       </div>
     );
   }

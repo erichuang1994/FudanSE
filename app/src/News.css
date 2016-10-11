@@ -1,3 +1,12 @@
 .size-xs {
     width: 2.125rem;
 }
+.news-header{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.news-body{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
