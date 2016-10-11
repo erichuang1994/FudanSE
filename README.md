@@ -42,3 +42,19 @@
 11. Followed list
   * List
 
+## URL
+* http://DOMAIN
+* http://DOMAIN/signup
+* http://DOMAIN/login
+* http://DOMAIN/logout
+* http://DOMAIN/setting
+* http://DOMAIN/visit
+* http://DOMAIN/upload
+* http://DOMAIN/follow
+* http://DOMAIN/unfollow
+* http://DOMAIN/USER
+* http://DOMAIN/USER/CITY
+* http://DOMAIN/USER/CITY/PICTURE
+* http://DOMAIN/USER/followers
+* http://DOMAIN/USER/following
+
