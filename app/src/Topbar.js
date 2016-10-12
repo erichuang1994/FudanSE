@@ -12,11 +12,11 @@ class Topbar extends Component {
             this.props.menus.map(function(menu) {
               if(menu.isactive){
               return (
-                <a href="javascript:;" className="item box-col isActive" onClick={setPageNum(menu.num)}>{menu.name}</a>
+                <a key={menu.num} href="javascript:;" className="item box-col isActive" onClick={setPageNum(menu.num)}>{menu.name}</a>
               );
             }else{
               return (
-                <a href="javascript:;" className="item box-col" onClick={setPageNum(menu.num)}>{menu.name}</a>
+                <a key={menu.num} href="javascript:;" className="item box-col" onClick={setPageNum(menu.num)}>{menu.name}</a>
               );
             }
             })
