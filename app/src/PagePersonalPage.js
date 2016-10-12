@@ -1,6 +1,5 @@
 import React from 'react';
 import Component from 'react';
-// import App from './App';
 import News from './News'
 
 import {
@@ -16,8 +15,8 @@ var PagePersonalPage = React.createClass({
 			{
 				//	add personal info here
 			}
-			<div>个人信息，名字，图片，粉丝数</div>
-			<News data={this.props.data} />
+			{/*<div>个人信息，名字，图片，粉丝数</div>*/}
+			{/*<News data={this.props.data} />*/}
 			<SimpleMapExample />
 		</div>
 		);
@@ -26,11 +25,17 @@ var PagePersonalPage = React.createClass({
 
 const SimpleMapExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultZoom={5}
+    defaultCenter={{ lat: 31.2304, lng: 121.4737 }}
   >
     <Marker
-      defaultPosition={{ lat: -34.397, lng: 150.644 }}
+      defaultPosition={{ lat: 31.2304, lng: 121.4737 }}
+    />
+    <Marker
+      defaultPosition={{lat:26.1008, lng:119.2951}}
+    />
+    <Marker
+      defaultPosition={{lat:23.9037, lng:121.0794}}
     />
   </GoogleMap>
 ));
