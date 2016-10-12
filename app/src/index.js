@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import PagePersonalPage from './PagePersonalPage';
+
 var NewsData = function(id, name, location) {
   return {
     userlink: "u/12345",
@@ -18,16 +20,17 @@ var news1 = NewsData(1, "张宝华", "Hongkong");
 var news2 = NewsData(2, "华莱士", "America");
 var news3 = NewsData(3, "扬州少年", "China");
 var news = [news1, news2, news3];
+var personal = [news3];
 var genMenus = function(name, href, isactive, num) {
   return {name: name, href: href, isactive: isactive, num: num}
 };
 var menus = [
   genMenus("首页", "news", true, 0),
   genMenus("我的足迹", "news", false, 1),
-  genMenus("消息", "messgae", false, 2)
+  genMenus("个人中心", "messgae", false, 2)
 ];
+
 ReactDOM.render(
-  <App datas={{
-  'menus': menus,
-  'news': news
-}}/>, document.getElementById('root'));
+	<App datas={{'menus':menus,'news':news, 'personal':personal}}/>,
+	document.getElementById('root')
+);
