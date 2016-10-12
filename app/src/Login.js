@@ -21,8 +21,8 @@ class Login extends Component {
             <h1>Login</h1>
             <input type="text" placeholder="Username"/>
             <input type="text" placeholder="Password"/>
-            <button>Login</button>
-            <p>Not a member? <span>Sign Up</span></p>
+            <button onClick={this.props.loginfunc}>Login</button>
+            <p>Not a member? <span onClick={this.props.signupfunc}>Sign Up</span></p>
           </div>
         </div>
 
