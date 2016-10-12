@@ -3,8 +3,8 @@ import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
 import './base.css';
 import './cards.css';
-import './login.css';
-class Login extends Component {
+import './Signup.css';
+class Signup extends Component {
 	render(){
 		return (
       <div className="vid-container">
@@ -21,8 +21,10 @@ class Login extends Component {
             <h1>Login</h1>
             <input type="text" placeholder="Username"/>
             <input type="text" placeholder="Password"/>
-            <button>Login</button>
-            <p>Not a member? <span>Sign Up</span></p>
+            <input type="text" placeholder="Nickname"/>
+            <input type="text" placeholder="Gender"/>
+            <input type="text" placeholder="Age"/>
+            <button onClick={this.props.loginfunc}>Sign up</button>
           </div>
         </div>
 
@@ -32,4 +34,4 @@ class Login extends Component {
 	 }
 }
 
-export default Login;
+export default Signup;
