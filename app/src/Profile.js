@@ -12,9 +12,9 @@ class Profit extends Component {
             <h1>个人资料</h1>
             <input type="text" placeholder="Old Password"/>
             <input type="text" placeholder="New Password"/>
-            <input type="text" placeholder="Nickname"/>
-            <input type="text" placeholder="Gender"/>
-            <input type="text" placeholder="Age"/>
+            <input type="text" placeholder="Nickname" value="admin"/>
+            <input type="text" placeholder="Gender" value="male"/>
+            <input type="text" placeholder="Age" value=""/>
             <button onClick="">修改</button>
           </div>
         </div>

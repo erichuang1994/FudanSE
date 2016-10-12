@@ -12,7 +12,7 @@ var App = React.createClass({
      this.setState({islogin: true});
   },
   getInitialState: function() {
-    return { islogin: false, pageNum:0, toSignup: false };
+    return { islogin: false, pageNum:0, toSignup: false};
   },
   setPageNum:function(num){
     return function(){
@@ -24,6 +24,14 @@ var App = React.createClass({
   signup:function(){
       this.setState({toSignup:true});
   },
+  deleteById:function(num){
+    for(var i = 0;i<this.props.datas['news'].length;i++){
+      if(this.props.datas['news'][i].id===num){
+          this.props.datas['news'].splice(i, num);
+          break;
+      }
+    }
+  },
   render: function() {
     if(this.state.islogin){
         return (
@@ -31,7 +39,7 @@ var App = React.createClass({
           <Topbar menus={this.props.datas['menus']} setPageNum={this.setPageNum}/>
           {(() => {
             switch (this.state.pageNum) {
-              case 0:   return <News data={this.props.datas['news']}></News>;
+              case 0:   return <News data={this.props.datas['news']} deleteById={this.deleteById}></News>;
               case 1:   return <PagePersonalPage data={this.props.datas['personal']}></PagePersonalPage>;
               case 2:   return <Profile></Profile>;
               default:   return <News data={this.props.datas['news']}></News>;

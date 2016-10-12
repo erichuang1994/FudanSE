@@ -12,6 +12,10 @@ var News = React.createClass({
 	editfunc:function(num){
 		this.setState({edit:true, curNum:num});
 	},
+	deleteById:function(){
+		this.props.deleteById(this.state.curNum);
+		this.setState({edit:false});
+	},
 	cancelEditfunc:function(num){
 		this.setState({edit:false});
 	},
@@ -29,7 +33,7 @@ var News = React.createClass({
 							<a href="javascript:;"  className="line-bottom" >
 								<span>收藏</span>
 							</a>
-							<a href="javascript:;"  className="line-bottom" >
+							<a href="javascript:;"  className="line-bottom" onClick={this.deleteById}>
 								<span>删除</span>
 							</a>
 							<a className="close line-top" href="javascript:;" onClick={this.cancelEditfunc}>

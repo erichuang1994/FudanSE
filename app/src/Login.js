@@ -25,8 +25,6 @@ class Login extends Component {
             <p>Not a member? <span onClick={this.props.signupfunc}>Sign Up</span></p>
           </div>
         </div>
-
-
       </div>
     );
 	 }
