@@ -5,6 +5,8 @@ import './index.css';
 import Login from './Login'
 import Signup from './Signup'
 import PagePersonalPage from './PagePersonalPage'
+import Profile from './Profile'
+
 var App = React.createClass({
   login: function() {
      this.setState({islogin: true});
@@ -31,6 +33,7 @@ var App = React.createClass({
             switch (this.state.pageNum) {
               case 0:   return <News data={this.props.datas['news']}></News>;
               case 1:   return <PagePersonalPage data={this.props.datas['personal']}></PagePersonalPage>;
+              case 2:   return <Profile></Profile>;
               default:   return <News data={this.props.datas['news']}></News>;
             }
           })()}
