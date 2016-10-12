@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import PagePersonalPage from './PagePersonalPage';
+
 var NewsData = function(id, name, location) {
   return {
     userlink: "u/12345",
@@ -26,8 +28,8 @@ var menus = [
   genMenus("我的足迹", "news", false, 1),
   genMenus("消息", "messgae", false, 2)
 ];
+
 ReactDOM.render(
-  <App datas={{
-  'menus': menus,
-  'news': news
-}}/>, document.getElementById('root'));
+	<PagePersonalPage data={news}/>,
+	document.getElementById('root')
+);
