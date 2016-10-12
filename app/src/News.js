@@ -56,7 +56,7 @@ var News = React.createClass({
 						<div className="box-col item-list">
 		 		 				<a className="item-main txt-l mct-a txt-cut"><span>{card.userName}</span></a>
 								<div className="item-minor txt-xxs mct-d txt-cut">
-									<span className="time">{card.date.toString()}</span>
+									<span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
 									<span className="from">来自{card.location}</span>
 								</div>
 						</div>
