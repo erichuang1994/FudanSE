@@ -1,5 +1,5 @@
 import React from 'react';
-
+import News from './News';
 import {
   withGoogleMap,
   GoogleMap,
@@ -44,10 +44,10 @@ var SimpleMapExample = React.createClass( {
     return (
       <SimpleMapExampleGoogleMap
         containerElement={
-          <div style={{ height: '500px', width : '500px' }} />
+          <div style={{ height: '700px', width : '500px' }} />
         }
         mapElement={
-           <div style={{ height: '500px', width: '500px' }} />
+           <div style={{ height: '700px', width: '500px' }} />
         }
       />
     );
