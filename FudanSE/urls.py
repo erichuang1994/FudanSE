@@ -15,22 +15,31 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from travelMap import views
+from travelMap import actionHandlers, apiHandlers;
+from travelMap import mockViews;
 
 urlpatterns = [
+    # admin page
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index),
-    url(r'^signup$', views.signup),
-    url(r'^login$', views.login),
-    url(r'^logout$', views.logout),
-    url(r'^setting$', views.setting),
-    url(r'^visit$', views.visit),
-    url(r'^upload$', views.upload),
-    url(r'^follow$', views.follow),
-    url(r'^unfollow$', views.unfollow),
-    url(r'^(?P<username>[0-9A-Za-z]+)$', views.user),
-    url(r'^(?P<username>[0-9A-Za-z]+)/(?P<cityName>[A-Za-z-]+)$', views.city),
-    url(r'^(?P<username>[0-9A-Za-z]+)/(?P<cityName>[A-Za-z-]+)/(?P<pictureId>\d+)$', views.picture),
-    url(r'^(?P<username>[0-9A-Za-z]+)/followers$', views.followers),
-    url(r'^(?P<username>[0-9A-Za-z]+)/following$', views.following),
+    
+    # static view page(not handlers), currently mocked
+    url(r'^$', mockViews.index), # 
+
+    # actions
+    url(r'^welcome$', actionHandlers.welcome),
+    url(r'^action/signup$', actionHandlers.signup),
+    url(r'^action/login$', actionHandlers.login),
+    url(r'^action/logout$', actionHandlers.logout),
+    url(r'^action/setting$', actionHandlers.modify_setting),
+    url(r'^action/visit$', actionHandlers.add_visited),
+    url(r'^action/upload$', actionHandlers.upload),
+    url(r'^action/follow$', actionHandlers.follow),
+    url(r'^action/unfollow$', actionHandlers.unfollow),
+
+    # apis
+    url(r'^api/(?P<username>[0-9A-Za-z]+)$', apiHandlers.user),
+    url(r'^api/(?P<username>[0-9A-Za-z]+)/(?P<cityName>[A-Za-z-]+)$', apiHandlers.city),
+    url(r'^api/(?P<username>[0-9A-Za-z]+)/(?P<cityName>[A-Za-z-]+)/(?P<pictureId>\d+)$', apiHandlers.picture),
+    url(r'^api/(?P<username>[0-9A-Za-z]+)/followers$', apiHandlers.followers),
+    url(r'^api/(?P<username>[0-9A-Za-z]+)/following$', apiHandlers.following),
 ]

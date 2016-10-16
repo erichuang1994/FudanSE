@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, UserManager
 
 class City(models.Model):
     name = models.CharField("City's name", max_length=50)
 
 class Traveller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField("User's email address", max_length=50)
     follows = models.ManyToManyField("self", symmetrical=False)
     cities = models.ManyToManyField(City)
 
