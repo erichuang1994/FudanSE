@@ -31,6 +31,7 @@
   * Description
   * Information related to the picture
   * Comments: scrollable list
+  * Publish a comment
 7. Setting
   * Modify personal information: form
 8. Add city
@@ -43,25 +44,23 @@
   * List
 
 ## API
-| Description | HTTP Method | URL | Parameters  |
-| --- | --- | --- | --- |
-| Homepage | GET | / | |
-| Page to signup | GET | /signup | |
-| Signup | POST | /signup | username, password, email |
-| Page to login | GET | /login | |
-| Login | POST | /login | username, password |
-| Logout | GET | /logout | |
-| Setting page | GET | /setting | |
-| Modify user information | POST | /setting | username, password, email |
-| Page to add visited city | GET | /visit | |
-| Add visited city | POST | /visit | city name |
-| Page to upload picture | GET | /upload | |
-| Upload picture | POST | /upload | image file |
-| Follow someone | POST | /follow | username |
-| Unfollow someone | POST | /unfollow | username |
-| Map of the user | GET | /USERNAME | |
-| Pictures of the city | GET | /USERNAME/CITY | |
-| Information of the picture | GET | /USERNAME/CITY/PICTURE | |
-| Page of followers | GET | /USER/followers | |
-| Page of following | GET | /USER/followering | |
+| Description | HTTP Method | URL | Parameters  | Return |
+| --- | --- | --- | --- | --- |
+| Login | POST | /api/login | username, password | |
+| Logout | POST | /api/logout | | |
+| Create traveller | POST | /api/traveller | username, password, email | |
+| Get traveller | GET | /api/traveller/USERNAME | | |
+| Update traveller | PUT | /api/traveller/USERNAME | username, password, email | |
+| Add visited city | POST | /api/traveller/USERNAME/city/CITYNAME | | |
+| Upload picture | POST | /api/traveller/USERNAME/city/CITYNAME/picture | description, image file | |
+| Follow someone | POST | /api/traveller/USERNAME/follow/USERNAME | | |
+| Unfollow someone | DELETE | /api/traveller/USERNAME/follow/USERNAME | | |
+| List of visited cities | GET | /api/traveller/USERNAME/city | | [cityname] |
+| Pictures of the city | GET | /api/traveller/USERNAME/city/CITYNAME/picture | [pictures] | |
+| Information of the picture | GET | /api/picture/PICTUREID | | id, description, like\_count, time, url |
+| List of followers | GET | /api/traveller/USERNAME/follow | | [username] |
+| List of following | GET | /api/traveller/USERNAME/followed | | [username] |
+| Create comment | POST | /api/message | content | |
+| Comments of the picture | GET | /api/picture/PICTUREID/message | | [comments] |
+| Comments of the user | GET | /api/traveller/USERNAME/message | | [comments] |
 
