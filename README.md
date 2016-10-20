@@ -45,6 +45,7 @@
 
 ## API
 Prefix: /api
+
 | Description | HTTP Method | Endpoint | Parameters  | Response |
 | --- | --- | --- | --- | --- |
 | Login | POST | /login | username, password | |
