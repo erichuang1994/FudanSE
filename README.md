@@ -44,23 +44,23 @@
   * List
 
 ## API
-| Description | HTTP Method | URL | Parameters  | Return |
+Prefix: /api
+| Description | HTTP Method | Endpoint | Parameters  | Response |
 | --- | --- | --- | --- | --- |
-| Login | POST | /api/login | username, password | |
-| Logout | POST | /api/logout | | |
-| Create traveller | POST | /api/traveller | username, password, email | |
-| Get traveller | GET | /api/traveller/USERNAME | | |
-| Update traveller | PUT | /api/traveller/USERNAME | username, password, email | |
-| Add visited city | POST | /api/traveller/USERNAME/city/CITYNAME | | |
-| Upload picture | POST | /api/traveller/USERNAME/city/CITYNAME/picture | description, image file | |
-| Follow someone | POST | /api/traveller/USERNAME/follow/USERNAME | | |
-| Unfollow someone | DELETE | /api/traveller/USERNAME/follow/USERNAME | | |
-| List of visited cities | GET | /api/traveller/USERNAME/city | | [cityname] |
-| Pictures of the city | GET | /api/traveller/USERNAME/city/CITYNAME/picture | [pictures] | |
-| Information of the picture | GET | /api/picture/PICTUREID | | id, description, like\_count, time, url |
-| List of followers | GET | /api/traveller/USERNAME/follow | | [username] |
-| List of following | GET | /api/traveller/USERNAME/followed | | [username] |
-| Create comment | POST | /api/message | content | |
-| Comments of the picture | GET | /api/picture/PICTUREID/message | | [comments] |
-| Comments of the user | GET | /api/traveller/USERNAME/message | | [comments] |
-
+| Login | POST | /login | username, password | |
+| Logout | POST | /logout | | |
+| Create traveller | POST | /travellers | username, password, email | |
+| Get traveller | GET | /travellers/USERNAME | | username, email |
+| Update traveller | PUT | /travellers/USERNAME | password, email | |
+| Add visited city | POST | /travellers/USERNAME/cities/CITYNAME | | |
+| Upload picture | POST | /travellers/USERNAME/cities/CITYNAME/pictures | description, image file | |
+| Follow someone | POST | /travellers/USERNAME/followers/USERNAME | | |
+| Unfollow someone | DELETE | /travellers/USERNAME/followers/USERNAME | | |
+| List of visited cities | GET | /travellers/USERNAME/cities | | [cityname] |
+| Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
+| Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
+| List of followers | GET | /travellers/USERNAME/followers | | [username] |
+| List of followings | GET | /travellers/USERNAME/followings | | [username] |
+| Create comment | POST | /pictures/PICTUREID/messages | username, content | |
+| Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
+| Comments of the user | GET | /travellers/USERNAME/messages | | [comments] |
