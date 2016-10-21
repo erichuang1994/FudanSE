@@ -52,16 +52,17 @@ Prefix: /api
 | Logout | POST | /logout | | |
 | Create traveller | POST | /travellers | username, password, email | |
 | Get traveller | GET | /travellers/USERNAME | | username, email |
-| Update traveller | PUT | /travellers/USERNAME | password, email | |
-| Add visited city | POST | /travellers/USERNAME/cities/CITYNAME | | |
-| Upload picture | POST | /travellers/USERNAME/cities/CITYNAME/pictures | description, image file | |
-| Follow someone | POST | /travellers/USERNAME/followers/USERNAME | | |
-| Unfollow someone | DELETE | /travellers/USERNAME/followers/USERNAME | | |
 | List of visited cities | GET | /travellers/USERNAME/cities | | [cityname] |
 | Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
 | Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |
-| Create comment | POST | /pictures/PICTUREID/messages | username, content | |
+| Create comment | POST | /pictures/PICTUREID/messages | content | |
 | Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
-| Comments of the user | GET | /travellers/USERNAME/messages | | [comments] |
+| Update traveller | PUT | /user/settings | password, email | |
+| Add visited city | POST | /user/cities/CITYNAME | | |
+| Upload picture | POST | /user/cities/CITYNAME/pictures | description, image file | |
+| Follow people | POST | /user/followers | [username] | |
+| Unfollow people | DELETE | /user/followers | [username] | |
+| List of comments received | GET | /user/messages | | [comments] |
+| Recent pictures of followings | GET | /user/dashboard | | [pictures] |
