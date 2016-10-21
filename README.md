@@ -50,19 +50,20 @@ Prefix: /api
 | --- | --- | --- | --- | --- |
 | Login | POST | /login | username, password | |
 | Logout | POST | /logout | | |
+| Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
+| Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
+| Create comment | POST | /pictures/PICTUREID/messages | content | |
 | Create traveller | POST | /travellers | username, password, email | |
 | Get traveller | GET | /travellers/USERNAME | | username, email |
 | List of visited cities | GET | /travellers/USERNAME/cities | | [cityname] |
 | Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
-| Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |
-| Create comment | POST | /pictures/PICTUREID/messages | content | |
-| Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
-| Update traveller | PUT | /user/settings | password, email | |
 | Add visited city | POST | /user/cities/CITYNAME | | |
 | Upload picture | POST | /user/cities/CITYNAME/pictures | description, image file | |
+| Recent pictures of followings | GET | /user/dashboard | | [pictures] |
 | Follow people | POST | /user/followers | [username] | |
 | Unfollow people | DELETE | /user/followers | [username] | |
 | List of comments received | GET | /user/messages | | [comments] |
-| Recent pictures of followings | GET | /user/dashboard | | [pictures] |
+| Update traveller | PUT | /user/settings | password, email | |
+
