@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
 import './base.css';
@@ -18,7 +18,7 @@ var Login = React.createClass({
 				body: data
 		})
 		.then(function(res){
-			if(res.status==200){
+			if(res.status === 200){
 					this.props.loginfunc();
 			}else{
 				alert("密码错误");

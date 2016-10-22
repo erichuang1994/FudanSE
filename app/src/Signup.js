@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
 import './base.css';
@@ -20,7 +20,7 @@ var Signup =React.createClass( {
 				body: data
 		})
 		.then(function(res){
-			if(res.status==200){
+			if(res.status === 200){
 					this.props.loginfunc();
 			}else{
 				alert("注册失败啦");
