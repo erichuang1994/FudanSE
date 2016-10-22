@@ -4,8 +4,29 @@ import 'purecss/build/grids-responsive-min.css';
 import './base.css';
 import './cards.css';
 import './Signup.css';
-class Signup extends Component {
-	render(){
+var Signup =React.createClass( {
+	handleSignup:function(event){
+		for(var key in this.refs) {
+    	if(this.refs.hasOwnProperty(key)) {
+        this.refs[key] = this.refs[key].value;
+    	}
+		}
+		var payload = this.refs;
+		var data = new FormData();
+		data.append( "json", JSON.stringify( payload ) );
+		fetch("/api/travellers",
+		{
+				method: "POST",
+				body: data
+		})
+		.then(function(res){
+			if(res.status==200){
+					this.props.loginfunc();
+			}else{
+				alert("注册失败啦");
+			}});
+	},
+	render:function(){
 		return (
       <div className="vid-container">
         <video id="Video1" className="bgvid back" autoPlay="false" muted="muted" preload="auto" loop>
@@ -19,19 +40,17 @@ class Signup extends Component {
           </video>
           <div className="box">
             <h1>Sign up</h1>
-            <input type="text" placeholder="Username"/>
-            <input type="text" placeholder="Password"/>
-            <input type="text" placeholder="Nickname"/>
-            <input type="text" placeholder="Gender"/>
-            <input type="text" placeholder="Age"/>
-            <button onClick={this.props.loginfunc}>Sign up</button>
+            <input type="text" placeholder="Username" ref="username"/>
+            <input type="password" placeholder="Password" ref="password"/>
+            <input type="text" placeholder="Nickname" ref="nickname"/>
+            <input type="text" placeholder="Gender" ref="gender"/>
+            <input type="text" placeholder="Age" ref="age"/>
+            <button onClick={this.handleSignup}>Sign up</button>
           </div>
         </div>
-
-
       </div>
     );
 	 }
-}
+});
 
 export default Signup;

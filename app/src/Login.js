@@ -22,7 +22,7 @@ var Login = React.createClass({
 					this.props.loginfunc();
 			}else{
 				alert("密码错误");
-			} })
+			} });
 	},
 	render:function(){
 		return (
