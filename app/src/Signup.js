@@ -20,8 +20,10 @@ var Signup =React.createClass( {
 		.then(function(res){
 			if(res.status === 200){
 					this.props.loginfunc();
+			}else if(res.status=== 302){
+				alert("帐号已存在");
 			}else{
-				alert("注册失败啦");
+				alert("注册失败");
 			}});
 	},
 	render:function(){
