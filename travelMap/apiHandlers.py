@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from travelMap import models
@@ -20,11 +20,11 @@ def signup(request):
     print(request.POST)
     if (User.objects.filter(username=username).count() > 0):
         print(User.objects.filter(username=username))
-        return HttpResponseNotFound('Username already exist!')
+        return HttpResponseBadRequest('Username already exist!')
     user = User.objects.create_user(username=username, password=password, email=email)
     Traveller.objects.create(user=user)
     auth.login(request, user)
-    return HttpResponseRedirect(reverse(index))
+    return HttpResponse()
     
 @csrf_exempt
 def login(request):
@@ -34,17 +34,15 @@ def login(request):
     user = auth.authenticate(username=username, password=password)
     if user is not None:
         auth.login(request, user)
-        # Redirect to a success page.
-        return HttpResponseRedirect(reverse(welcome))
+        return HttpResponse()
     else:
-        # Return an 'invalid login' error message.
-        return HttpResponseNotFound('username or password incorrect!')
+        return HttpResponse('username or password incorrect!', status=401)
 
 @csrf_exempt
 @login_required
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect(reverse(index))
+    return HttpResponse()
 
 @csrf_exempt
 @login_required
@@ -59,8 +57,7 @@ def modify_setting(request):
     user = User.objects.filter(username=username)[0];
     user.set_password(request.POST['password'])
     user.save()
-    #return to previous page(used HTTP_REFERER, can also simply replace with modify_setting page)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return HttpResponse()
 
 @csrf_exempt
 @login_required
