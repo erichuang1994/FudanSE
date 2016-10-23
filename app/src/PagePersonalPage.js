@@ -1,10 +1,6 @@
 import React from 'react';
-import News from './News';
-import {
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-} from "react-google-maps";
+import Map from './Map';
+//import News from './News';
 
 var PagePersonalPage = React.createClass({
 	render : function() {
@@ -15,12 +11,13 @@ var PagePersonalPage = React.createClass({
 			}
 			{/*<div>个人信息，名字，图片，粉丝数</div>*/}
 			{/*<News data={this.props.data} />*/}
-			<SimpleMapExample />
+			<Map />
 		</div>
 		);
 	}
 });
 
+/*
 const SimpleMapExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
     defaultZoom={5}
@@ -53,4 +50,6 @@ var SimpleMapExample = React.createClass( {
     );
   }
 });
+*/
+
 export default PagePersonalPage;
