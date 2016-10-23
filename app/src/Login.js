@@ -6,6 +6,7 @@ import './cards.css';
 import './login.css';
 var Login = React.createClass({
 	handleLogin:function(event) {
+		var loginfunc = this.props.loginfunc;
 		var data = new FormData();
 		data.append("username",this.refs.username.value);
 		data.append("password",this.refs.password.value);
@@ -16,7 +17,7 @@ var Login = React.createClass({
 	  })
 		.then(function(res){
   	if(res.status === 200){
-    	this.props.loginfunc();
+    	loginfunc();
   	}else if(res.status === 400){
     	alert("密码错误");
   	}});

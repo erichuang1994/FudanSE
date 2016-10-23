@@ -48,9 +48,9 @@ var News = React.createClass({
 			<div>
 		<div>
 		{
-			this.props.data.map((card) => {
+			this.props.data.map((card, index) => {
 				return (
-				<div key={card.id} className="card card9 line-around" >
+				<div key={index} className="card card9 line-around" >
 					<header className="layout-box media-graphic">
 						<div className="mod-media size-xs news-header">
 							<a href={card.userlink}>
