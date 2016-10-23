@@ -6,16 +6,14 @@ import './cards.css';
 import './Signup.css';
 var Signup =React.createClass( {
 	handleSignup:function(event){
+		var data = new FormData();
 		for(var key in this.refs) {
     	if(this.refs.hasOwnProperty(key)) {
-        this.refs[key] = this.refs[key].value;
+				data.append(key, this.refs[key].value);
     	}
 		}
-		var payload = this.refs;
-		var data = new FormData();
-		data.append( "json", JSON.stringify( payload ) );
 		fetch("/api/travellers",
-		{
+		{		credentials: 'include',
 				method: "POST",
 				body: data
 		})
@@ -42,9 +40,7 @@ var Signup =React.createClass( {
             <h1>Sign up</h1>
             <input type="text" placeholder="Username" ref="username"/>
             <input type="password" placeholder="Password" ref="password"/>
-            <input type="text" placeholder="Nickname" ref="nickname"/>
-            <input type="text" placeholder="Gender" ref="gender"/>
-            <input type="text" placeholder="Age" ref="age"/>
+            <input type="text" placeholder="Email" ref="email"/>
             <button onClick={this.handleSignup}>Sign up</button>
           </div>
         </div>

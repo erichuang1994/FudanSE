@@ -10,6 +10,7 @@ var Login = React.createClass({
 		data.append("username",this.refs.username.value);
 		data.append("password",this.refs.password.value);
 		fetch("/api/login", {
+			credentials: 'include',
 	    method: 'post',
 	    body: data
 	  })
