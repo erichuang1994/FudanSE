@@ -6,23 +6,19 @@ import './cards.css';
 import './login.css';
 var Login = React.createClass({
 	handleLogin:function(event) {
-		var payload = {
-				username: this.refs.username.value,
-				password: this.refs.password.value
-		};
 		var data = new FormData();
-		data.append( "json", JSON.stringify( payload ) );
-		fetch("/api/login",
-		{
-				method: "POST",
-				body: data
-		})
+		data.append("username",this.refs.username.value);
+		data.append("password",this.refs.password.value);
+		fetch("/api/login", {
+	    method: 'post',
+	    body: data
+	  })
 		.then(function(res){
-			if(res.status === 200){
-					this.props.loginfunc();
-			}else{
-				alert("密码错误");
-			} });
+  	if(res.status === 200){
+    	this.props.loginfunc();
+  	}else if(res.status === 400){
+    	alert("密码错误");
+  	}});
 	},
 	render:function(){
 		return (
