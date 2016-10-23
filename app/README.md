@@ -13,7 +13,7 @@ data.append( "json", JSON.stringify( payload ) );
 fetch("/api/login",
       {
   method: "POST",
-  body: data
+  body: data,
 })
   .then(function(res){
   if(res.status === 200){
