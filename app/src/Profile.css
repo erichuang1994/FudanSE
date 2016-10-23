@@ -80,3 +80,17 @@ body{
   cursor:pointer;
   color:#666;
 }
+
+.Profliebox select{
+  display:block;
+  width:332px;
+  margin:20px auto;
+  padding:15px;
+  border-color:rgba(0,0,0,0.2);
+  color:#000;
+  border:0.2;
+}
+
+.Profliebox select:focus,.box select:active{
+  outline:none;
+}

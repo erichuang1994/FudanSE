@@ -42,6 +42,7 @@ var Signup =React.createClass( {
             <input type="password" placeholder="Password" ref="password"/>
             <input type="text" placeholder="Email" ref="email"/>
             <button onClick={this.handleSignup}>Sign up</button>
+            <p>Own an account? <span onClick={this.props.signupfunc}>Log In</span></p>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ var App = React.createClass({
     }.bind(this);
   },
   signup:function(){
-      this.setState({toSignup:true});
+      this.setState({toSignup: !this.state.toSignup});
   },
   deleteById:function(num){
     for(var i = 0;i<this.props.datas['news'].length;i++){
@@ -50,7 +50,7 @@ var App = React.createClass({
     }else{
       if (this.state.toSignup) {
         return (
-          <Signup loginfunc={this.login}></Signup>
+          <Signup loginfunc={this.login} signupfunc={this.signup}></Signup>
         );
       }
       else {
