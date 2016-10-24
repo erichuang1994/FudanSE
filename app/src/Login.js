@@ -18,7 +18,7 @@ var Login = React.createClass({
 		.then(function(res){
   	if(res.status === 200){
     	loginfunc();
-  	}else if(res.status === 400){
+  	}else if(res.status === 401){
     	alert("密码错误");
   	}});
 	},

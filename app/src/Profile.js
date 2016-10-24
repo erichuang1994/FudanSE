@@ -7,8 +7,8 @@ import './Profile.css';
 var Profit = React.createClass( {
   handleProfit:function(event) {
     var data = new FormData();
-    data.append("username",this.refs.username.value);
     data.append("password",this.refs.password.value);
+    data.append("email",this.refs.email.value);
     fetch("/api/settings", {
       credentials: 'include',
       method: 'put',
@@ -17,8 +17,8 @@ var Profit = React.createClass( {
     .then(function(res){
     if(res.status === 200){
       alert("修改成功");
-    }else if(res.status === 400){
-      alert("密码错误");
+    }else if(res.status === 500){
+      alert("修改失败");
     }});
   },
 	render(){
@@ -26,10 +26,9 @@ var Profit = React.createClass( {
         <div className="incontainer">
           <div className="Profliebox">
             <h1>个人资料</h1>
-            <input type="text" placeholder="Old Password" ref="username"/>
+            <input type="text" placeholder="Old Password" />
             <input type="text" placeholder="New Password" ref="password"/>
-            <input type="text" placeholder="Nickname" value="admin"/>
-            
+            <input type="text" placeholder="Email" value="email"/>
             <input type="text" placeholder="Age" />
             <select name="Gender">
               <option value="male">Male</option>
