@@ -3,6 +3,8 @@ from django.contrib.auth.models import User, UserManager
 
 class City(models.Model):
     name = models.CharField("City's name", max_length=50)
+    latitude = models.DecimalField(max_digits=5, decimal_places=2)
+    longitude = models.DecimalField(max_digits=5, decimal_places=2)
 
 class Traveller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
