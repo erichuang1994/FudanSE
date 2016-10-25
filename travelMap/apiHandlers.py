@@ -146,13 +146,27 @@ def comments_of_picture(request, picture_id):
 @csrf_exempt
 @login_required
 def get_traverller(request, username):
-    pass
+    if (request.method == 'GET'):
+        user = getOnlyElement(User.objects.filter(username=username))
+        if (user is None):
+            return HttpResponseBadRequest("No Such User!")
+        result = {"username" : username, "email" : user.email}
+        return HttpResponse(dumps(result))
+    return HttpResponseNotFound()
 
 @csrf_exempt
 @login_required
 def update_followers(request):
-    # username / POST
-    pass
+    user = request.user
+    if (request.method == 'GET'):
+        traveller = getOnlyElement(Traveller.objects.filter(user=user))
+        traveller.follows.add(request.POST['username'])
+        return HttpResponse()
+    if (request.method == 'DELETE'):
+        traveller = getOnlyElement(Traveller.objects.filter(user=user))
+        traveller.follows.remove(request.DELETE['username'])
+        return HttpResponse()
+    return HttpResponseNotFound()
 
 @csrf_exempt
 @login_required
