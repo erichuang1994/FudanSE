@@ -44,6 +44,8 @@ const MapWithMarker = withGoogleMap(props => (
 
 var Map = React.createClass({
 	getInitialState:function() {
+		this.height = "700";
+		this.width = "500";
     return { focusCity: "" };
   },
 	updateFocusCity:function(name){
@@ -75,6 +77,8 @@ var Map = React.createClass({
 		var news3 = NewsData("扬州少年", "China","http://www.yztm.net/Images/5839dbb0-35b1-467d-a91c-07fc1042e723.jpg","http://photocdn.sohu.com/20111227/Img330426899.jpg");
 		var news = [news1, news2, news3];
 		this.news = news;
+		this.height = "300";
+		this.width = "500";
 		this.setState({focusCity: name});
 	},
 	render : function() {
@@ -85,10 +89,10 @@ var Map = React.createClass({
 				mapCenter={{ lat: 26.08, lng: 119.3 }}
 				marker={[MarkerData('上海', 31.2304, 121.4737), MarkerData('香港', 22.2, 114.1), MarkerData('扬州', 32.39, 119.42)]}
 				containerElement={
-					<div style={{ height: '500px', width : '500px' }} />
+					<div style={{ height: this.height+'px', width : this.width+'px' }} />
 				}
 				mapElement={
-					<div style={{ height: '500px', width: '500px' }} />
+					<div style={{ height: this.height+'px', width: this.width+'px' }} />
 				}
 				updateFocusCity={this.updateFocusCity}
 			/>
