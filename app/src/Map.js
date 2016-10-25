@@ -1,6 +1,6 @@
 import React from 'react';
 import News from './News';
-import {newsdata,shanghai} from '../public/newsdata.js';
+import {newsdata,shanghai} from './newsdata';
 import {
 	GoogleMap,
 	Marker,
@@ -61,7 +61,6 @@ var Map = React.createClass({
 			// handle there
 			console.log(res.status);
 		}});
-		this.news = newsdata;
 		this.height = "300";
 		this.width = "500";
 		this.setState({focusCity: name});
@@ -82,7 +81,7 @@ var Map = React.createClass({
 				updateFocusCity={this.updateFocusCity}
 			/>
 			{this.state.focusCity!=="" ? (
-			<News data={this.news} deleteById={()=>{console.log("hello world");}}></News>
+			<News data={shanghai} deleteById={()=>{console.log("hello world");}}></News>
 			) :
 			null}
 			</div>
