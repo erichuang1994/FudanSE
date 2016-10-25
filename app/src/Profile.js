@@ -26,8 +26,8 @@ var Profit = React.createClass( {
         <div className="incontainer">
           <div className="Profliebox">
             <h1>个人资料</h1>
-            <input type="text" placeholder="Old Password" />
-            <input password="password" placeholder="New Password" ref="password"/>
+            <input type="password" placeholder="Old Password" />
+            <input type="password" placeholder="New Password" ref="password"/>
             <input type="text" placeholder="Email" ref="email"/>
             <input type="text" placeholder="Age" />
             <select name="Gender">
