@@ -10,14 +10,13 @@ urlpatterns = [
     url(r'^travellers$', apiHandlers.signup),
     url(r'^travellers/(?P<username>[0-9A-Za-z]+)$', apiHandlers.get_traverller),
     url(r'^travellers/(?P<username>[0-9A-Za-z]+)/cities$', apiHandlers.visited_cities),
-    url(r'^travellers/(?P<username>[0-9A-Za-z]+)/cities/(?P<cityName>[A-Za-z-]+)/pictures$', apiHandlers.pictures_of_city),
+    url(r'^travellers/(?P<username>[0-9A-Za-z]+)/cities/pictures$', apiHandlers.pictures_of_city),
     url(r'^traverllers/(?P<username>[0-9A-Za-z]+)/followers$', apiHandlers.followers),
     url(r'^traverllers/(?P<username>[0-9A-Za-z]+)/followings$', apiHandlers.followings),
-    url(r'^user/cities/(?P<cityname>[A-Za-z-]+)$', apiHandlers.add_visited),
-    url(r'^user/cities/(?P<cityname>[A-Za-z-]+)/pictures$', apiHandlers.upload),
+    url(r'^user/cities/visit$', apiHandlers.add_visited),
+    url(r'^user/cities/upload$', apiHandlers.upload),
     url(r'^user/dashboard$', apiHandlers.dashboard),
     url(r'^user/followers$', apiHandlers.update_followers),
     url(r'^user/messages$', apiHandlers.messages_received),
     url(r'^user/settings$', apiHandlers.modify_setting),
 ]
-

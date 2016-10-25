@@ -56,11 +56,11 @@ Prefix: /api
 | Create traveller | POST | /travellers | username, password, email | |
 | Get traveller | GET | /travellers/USERNAME | | username, email |
 | List of visited cities | GET | /travellers/USERNAME/cities | | [cityname] |
-| Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
+| Pictures of the city | GET | /travellers/USERNAME/cities/pictures | cityname | [pictures] |
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |
-| Add visited city | POST | /user/cities/CITYNAME | | |
-| Upload picture | POST | /user/cities/CITYNAME/pictures | description, image file | |
+| Add visited city | POST | /user/cities/visit | cityname | |
+| Upload picture | POST | /user/cities/upload | cityname, description, image file | |
 | Recent pictures of followings | GET | /user/dashboard | | [pictures] |
 | Follow people | POST | /user/followers | [username] | |
 | Unfollow people | DELETE | /user/followers | [username] | |

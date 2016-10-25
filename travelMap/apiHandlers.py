@@ -9,12 +9,13 @@ from travelMap import models
 from travelMap.mockViews import *
 from travelMap.models import *
 from json import dumps, loads
+from django.utils import timezone
 
 # Handlers for API calls from frontend
 
 def getOnlyElement(a):
     if (len(a) != 1) :
-        return None;
+        return None
     return a[0]
 
 @csrf_exempt
@@ -57,36 +58,24 @@ def logout(request):
 
 @csrf_exempt
 @login_required
-def comments_of_picture(request, picture_id):
-    if (request.method == 'GET'):
-        picture = getOnlyElement(
-            Picture.objects.filter(id=picture_id));
-        if (picture is None) :
-            return HttpResponseNotFound("No Such Picture!");
-        messages = Message.objects.filter(picture=picture)
-        return HttpResponse(messages);
-    return HttpResponseNotFound()
-
-@csrf_exempt
-@login_required
 def modify_setting(request):
     # password
-    user = request.user;
+    user = request.user
     user.set_password(request.POST['password'])
     user.save()
     return HttpResponse()
 
 @csrf_exempt
 @login_required
-def add_visited(request, cityname):
+def add_visited(request):
     # / POST
     if (request.method == 'POST'):
+        cityname = request.POST['cityname']
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
             return HttpResponseNotFound("No Such City")
-            print(request.user)
-        traveller = getOnlyElement(Traveller.objects.filter(user=request.user));
-        traveller.cities.add(city);
+        traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
+        traveller.cities.add(city)
         return HttpResponse()
     return HttpResponseNotFound()
 
@@ -97,17 +86,66 @@ def visited_cities(request, username):
         user = getOnlyElement(User.objects.filter(username=username))
         if (user is None):
             return HttpResponseNotFound("No Such User!")
-        traveller = getOnlyElement(Traveller.objects.filter(user=user));
+        traveller = getOnlyElement(Traveller.objects.filter(user=user))
         result = []
         for x in list(traveller.cities.all()):
-            result.append(x.name);
+            result.append(x.name)
         return HttpResponse(dumps(result))
     return HttpResponseNotFound()
 
 @csrf_exempt
 @login_required
-def upload(request, cityname):
+def upload(request):
     # image file / POST
+    if (request.method == 'POST') :
+        traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
+        cityname = request.POST['cityname']
+        description = request.POST['description']
+        city = getOnlyElement(City.objects.filter(name=cityname))
+        if (city is None) :
+            return HttpResponseNotFound("No Such City!")
+        picture = Picture.objects.create(description=description, like_count=0, time=timezone.now(), traveller=traveller, city=city, pic_file=request.FILES['picture'])
+        print(picture.id)
+        return HttpResponse()
+    return HttpResponseNotFound()    
+
+@csrf_exempt
+@login_required
+def pictures_of_city(request, username):
+    if (request.method == 'GET') :
+        cityname = request.POST['cityname']
+        city = getOnlyElement(City.objects.filter(name=cityname))
+        if (city is None) :
+            return HttpResponseNotFound("No Such City!")            
+        pictures = Picture.objects.filter(city=city)
+        return HttpResponse(pictures)        
+    return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def get_picture(request, picture_id):
+    if (request.method == 'GET') :
+        picture = getOnlyElement(Picture.objects.filter(id=picture_id))
+        if (picture is None) :
+            return HttpResponseNotFound("No Such Picture!")
+        return HttpResponse(Picture)
+    return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def comments_of_picture(request, picture_id):
+    if (request.method == 'GET'):
+        picture = getOnlyElement(
+            Picture.objects.filter(id=picture_id))
+        if (picture is None) :
+            return HttpResponseNotFound("No Such Picture!")
+        messages = Message.objects.filter(picture=picture)
+        return HttpResponse(messages)
+    return HttpResponseNotFound()
+
+@csrf_exempt
+@login_required
+def get_traverller(request, username):
     pass
 
 @csrf_exempt
@@ -120,24 +158,6 @@ def update_followers(request):
 @login_required
 def messages_received(request):
     # username / POST
-    pass
-
-@csrf_exempt
-@login_required
-def get_traverller(request, username):
-    # TODO
-    pass
-
-@csrf_exempt
-@login_required
-def pictures_of_city(request, username, cityName):
-    # TODO
-    pass
-
-@csrf_exempt
-@login_required
-def get_picture(request, pictureId):
-    # TODO
     pass
 
 @csrf_exempt
