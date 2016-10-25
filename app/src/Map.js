@@ -18,12 +18,6 @@ const MarkerData = function(dname, dlat, dlng) {
 	};
 }
 
-//	marker click function
-// const onMarkerClick = function(name) {
-// 	console.log('click\t' + name);
-// 	this.props.updateFocusCity(name);
-// }
-
 const MapWithMarker = withGoogleMap(props => (
 	<GoogleMap
 		defaultZoom={props.zoom}
@@ -50,17 +44,17 @@ var Map = React.createClass({
     return { focusCity: "" };
   },
 	updateFocusCity:function(name){
-		fetch("/travellers/USERNAME/cities/CITYNAME/pictures", {
-			credentials: 'include',
-		})
-		.then(function(res){
-		if(res.status === 200){
-			// handle there
-			console.log(res.status);
-		}else if(res.status === 401){
-			// handle there
-			console.log(res.status);
-		}});
+		// fetch("/travellers/USERNAME/cities/CITYNAME/pictures", {
+		// 	credentials: 'include',
+		// })
+		// .then(function(res){
+		// if(res.status === 200){
+		// 	// handle there
+		// 	console.log(res.status);
+		// }else if(res.status === 401){
+		// 	// handle there
+		// 	console.log(res.status);
+		// }});
 		this.height = "300";
 		this.width = "500";
 		this.setState({focusCity: name});
