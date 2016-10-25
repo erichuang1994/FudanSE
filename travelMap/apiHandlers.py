@@ -2,12 +2,13 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from travelMap import models
 from travelMap.mockViews import *
 from travelMap.models import *
+from json import dumps, loads
 
 # Handlers for API calls from frontend
 
@@ -78,13 +79,14 @@ def modify_setting(request):
 @csrf_exempt
 @login_required
 def add_visited(request, cityname):
-    # cityname / POST
+    # / POST
     if (request.method == 'POST'):
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
             return HttpResponseNotFound("No Such City")
+            print(request.user)
         traveller = getOnlyElement(Traveller.objects.filter(user=request.user));
-        traveller.follows.add(city);
+        traveller.cities.add(city);
         return HttpResponse()
     return HttpResponseNotFound()
 
@@ -92,8 +94,14 @@ def add_visited(request, cityname):
 @login_required
 def visited_cities(request, username):
     if (request.method == 'GET'):
-        traveller = getOnlyElement(user=request.user)
-        return HttpResponse(traveller.cities)
+        user = getOnlyElement(User.objects.filter(username=username))
+        if (user is None):
+            return HttpResponseNotFound("No Such User!")
+        traveller = getOnlyElement(Traveller.objects.filter(user=user));
+        result = []
+        for x in list(traveller.cities.all()):
+            result.append(x.name);
+        return HttpResponse(dumps(result))
     return HttpResponseNotFound()
 
 @csrf_exempt
