@@ -53,16 +53,20 @@ var Map = React.createClass({
 		this.setState({addCity: true});
 	},
 	handleAddCity:function(){
-		// fetch("/api/", {
+		// var data = new FormData();
+		// data.append("cityname",this.refs.cityname.value);
+		// fetch("/user/cities/visit", {
 		// 	credentials: 'include',
 	  //   method: 'post',
 	  //   body: data
 	  // })
 		// .then(function(res){
   	// if(res.status === 200){
-    // 	loginfunc();
+		// 	alert("添加成功");
+		// 	this.setState({addCity:false});
   	// }else if(res.status === 401){
-    // 	alert("密码错误");
+    // 	alert("添加不成功");
+		// 	this.setState({addCity:false});
   	// }});
 		this.setState({addCity:false});
 	},
