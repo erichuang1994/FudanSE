@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {newsdata} from './newsdata'
+import {newsdata} from './newsdata';
 var personal = [newsdata[2]];
 var genMenus = function(name, href, isactive, num) {
   return {name: name, href: href, isactive: isactive, num: num}

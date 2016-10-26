@@ -53,25 +53,25 @@ var Map = React.createClass({
 		this.setState({addCity: true});
 	},
 	handleAddCity:function(){
-		// var data = new FormData();
-		// data.append("cityname",this.refs.cityname.value);
-		// fetch("/user/cities/visit", {
-		// 	credentials: 'include',
-	  //   method: 'post',
-	  //   body: data
-	  // })
-		// .then(function(res){
-  	// if(res.status === 200){
-		// 	alert("添加成功");
-		// 	this.setState({addCity:false});
-  	// }else if(res.status === 401){
-    // 	alert("添加不成功");
-		// 	this.setState({addCity:false});
-  	// }});
+		var data = new FormData();
+		data.append("cityname",this.refs.cityname.value);
+		fetch("/user/cities/visit", {
+			credentials: 'include',
+	    method: 'post',
+	    body: data
+	  })
+		.then(function(res){
+  	if(res.status === 200){
+			alert("添加成功");
+			this.setState({addCity:false});
+  	}else if(res.status === 401){
+    	alert("添加不成功");
+			this.setState({addCity:false});
+  	}});
+		// console.log(localStorage.getItem('username'));
 		this.setState({addCity:false});
 	},
 	cancelAddCity:function(){
-
 		this.setState({addCity:false});
 	},
 	closeAddPic:function(){
@@ -106,7 +106,7 @@ var Map = React.createClass({
 						<div className="fixed-center" >
         			<input className="base-input" ref="cityname" type="text" placeholder="输入城市名"/>
         			<button  className="base-button pure-button pure-button-primary" onClick={this.handleAddCity}>添加</button>
-							<button  className="base-button pure-button pure-button-primary" onClick={this.cancelAddCity}>取消</button>
+							<button  className="base-button pure-button pure-button-primary" onClick={()=>this.setState({addCity:false})}>取消</button>
 						</div>
 					</div>
 				) :

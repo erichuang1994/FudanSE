@@ -8,6 +8,7 @@ var Login = React.createClass({
 	handleLogin:function(event) {
 		var loginfunc = this.props.loginfunc;
 		var data = new FormData();
+		var username = this.refs.username.value;
 		data.append("username",this.refs.username.value);
 		data.append("password",this.refs.password.value);
 		fetch("/api/login", {
@@ -18,6 +19,7 @@ var Login = React.createClass({
 		.then(function(res){
   	if(res.status === 200){
     	loginfunc();
+			localStorage.setItem('username', username);
   	}else if(res.status === 401){
     	alert("密码错误");
   	}});
