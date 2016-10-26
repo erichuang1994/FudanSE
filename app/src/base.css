@@ -68,3 +68,28 @@ a .mct-a, .mct-a {
     background-repeat: no-repeat;
     background-position: bottom;
 }
+.fixed-center{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 30%;
+  padding-bottom: 30%;
+}
+.base-input{
+line-height: 120%;
+  padding:2px;
+  margin-bottom: 10px;
+  width: 150px;
+  text-align: center;
+  font-size: 15px;
+  font-family: initial;
+  border-style: none none solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #9A9A9A;
+  outline: none;
+  -webkit-appearance: none;
+}
+.base-button{
+  margin:10px;
+}
