@@ -2,7 +2,7 @@ import React from 'react';
 import News from './News';
 import './Map.css';
 import Addpic from './Addpic';
-import {newsdata,shanghai} from './newsdata';
+import {newsdata,shanghai,yangzhou} from './newsdata';
 import {
 	GoogleMap,
 	Marker,
@@ -85,15 +85,19 @@ var Map = React.createClass({
 				mapCenter={{ lat: 26.08, lng: 119.3 }}
 				marker={[MarkerData('上海', 31.2304, 121.4737), MarkerData('香港', 22.2, 114.1), MarkerData('扬州', 32.39, 119.42)]}
 				containerElement={
-					<div style={{ height: this.height+'px', width : this.width+'px' }} />
+					<div style={{ height: this.height+'px', width: this.width+'px', maxWidth: '100%'}} />
 				}
 				mapElement={
-					<div style={{ height: this.height+'px', width: this.width+'px' }} />
+					<div style={{ height: this.height+'px', width: this.width+'px', maxWidth: '100%'}} />
 				}
 				updateFocusCity={this.updateFocusCity}
 			/>
-			{this.state.focusCity!=="" ? (
+			{this.state.focusCity==="上海" ? (
 			<News data={shanghai} deleteById={()=>{console.log("hello world");}}></News>
+			) :
+			null}
+			{this.state.focusCity==="扬州" ? (
+			<News data={yangzhou} deleteById={()=>{console.log("hello world");}}></News>
 			) :
 			null}
 			</div>

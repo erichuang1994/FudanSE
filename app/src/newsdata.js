@@ -16,15 +16,23 @@ const news3 = NewsData("扬州少年", "China", "./img/yangzhou.jpg", "./avator/
 const sh1 = NewsData("扬州少年", "Shanghai", "./img/shanghai1.jpg", "./avator/ha.jpg");
 const sh2 = NewsData("扬州少年", "Shanghai", "./img/shanghai2.jpg", "./avator/ha.jpg");
 const sh3 = NewsData("扬州少年", "Shanghai", "./img/shanghai3.jpg", "./avator/ha.jpg");
+const yz1 = NewsData("扬州少年", "Shanghai", "./img/yangzhou3.jpg", "./avator/ha.jpg");
+const yz2 = NewsData("扬州少年", "Shanghai", "./img/yangzhou2.jpg", "./avator/ha.jpg");
+const yz3 = NewsData("扬州少年", "Shanghai", "./img/yangzhou1.jpg", "./avator/ha.jpg");
 var newsdata = [news1, news2, news3];
 var shanghai = [sh1, sh2, sh3];
+var yangzhou = [yz1, yz2, yz3];
 export {
   newsdata,
   shanghai,
+  yangzhou,
   news1,
   news2,
   news3,
   sh1,
   sh2,
-  sh3
+  sh3,
+  yz1,
+  yz2,
+  yz3
 };
