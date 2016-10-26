@@ -1,7 +1,7 @@
 import React from 'react';
 import News from './News';
 import './Map.css';
-import {newsdata,shanghai} from './newsdata';
+import {newsdata,shanghai,yangzhou} from './newsdata';
 import {
 	GoogleMap,
 	Marker,
@@ -81,8 +81,12 @@ var Map = React.createClass({
 				}
 				updateFocusCity={this.updateFocusCity}
 			/>
-			{this.state.focusCity!=="" ? (
+			{this.state.focusCity==="上海" ? (
 			<News data={shanghai} deleteById={()=>{console.log("hello world");}}></News>
+			) :
+			null}
+			{this.state.focusCity==="扬州" ? (
+			<News data={yangzhou} deleteById={()=>{console.log("hello world");}}></News>
 			) :
 			null}
 			</div>
