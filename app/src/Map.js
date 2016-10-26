@@ -48,6 +48,9 @@ var Map = React.createClass({
 	addpic:function(){
 	  this.setState({addPic: true});
 	},
+	closeAddPic:function(){
+	  this.setState({addPic: false});
+	},
 	updateFocusCity:function(name){
 		// fetch("/travellers/USERNAME/cities/CITYNAME/pictures", {
 		// 	credentials: 'include',
@@ -68,9 +71,9 @@ var Map = React.createClass({
 		return (
 			<div>
 				{this.state.addPic ? (
-					<div>
+					<div className="ale">
 						<Addpic></Addpic>
-						<button>确认上传</button>
+						<button className="upl" onClick={this.closeAddPic}>确认上传</button>
 					</div>
 				) :
 				null}

@@ -68,7 +68,7 @@ var Addpic = React.createClass( {
   },
 	render(){
 		return (
-        <div className="ale">
+        <div>
           <input id="files" type="file" onChange={this.previewImage} multiple="multiple" style={{display:'none',height:'0px',width:'0px'}}></input>
           <div id="prvid"></div>
         </div>

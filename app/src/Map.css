@@ -19,6 +19,18 @@ background:rgba(0,0,0,0.2);;
   position: absolute;
 }
 
+.upl {
+  background:#27ae60;
+  border:0.001;
+  color:#fff;
+  padding:10px;
+  font-size:13px;
+  display:block;
+  cursor:pointer;
+  width:20%;
+  bottom:0px;
+  float:right
+}
 
 .mapbox{
   margin:0px;
@@ -48,7 +60,8 @@ background:rgba(0,0,0,0.2);;
 }
 .mapbox button{
   background:#27ae60;
-  border:0.01;
+  border:0.001;
+  border-color:rgba(255,255,255,0.5);
   color:#fff;
   padding:10px;
   font-size:18px;
