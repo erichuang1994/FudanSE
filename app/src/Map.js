@@ -1,5 +1,6 @@
 import React from 'react';
 import News from './News';
+import './Map.css';
 import {newsdata,shanghai} from './newsdata';
 import {
 	GoogleMap,
@@ -62,6 +63,12 @@ var Map = React.createClass({
 	render : function() {
 		return (
 			<div>
+				<div className="mapbox">
+					<button>添加城市</button>
+				</div>
+				<div className="mapbox">
+					<button>添加照片</button>
+				</div>
 			<MapWithMarker
 				zoom={5}
 				mapCenter={{ lat: 26.08, lng: 119.3 }}
