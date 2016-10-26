@@ -1,6 +1,7 @@
 import React from 'react';
 import News from './News';
 import './Map.css';
+import Addpic from './Addpic';
 import {newsdata,shanghai} from './newsdata';
 import {
 	GoogleMap,
@@ -42,8 +43,11 @@ var Map = React.createClass({
 	getInitialState:function() {
 		this.height = "700";
 		this.width = "500";
-    return { focusCity: "" };
+    return { focusCity: "", addCity: false, addPic: false };
   },
+	addpic:function(){
+	  this.setState({addPic: true});
+	},
 	updateFocusCity:function(name){
 		// fetch("/travellers/USERNAME/cities/CITYNAME/pictures", {
 		// 	credentials: 'include',
@@ -63,11 +67,18 @@ var Map = React.createClass({
 	render : function() {
 		return (
 			<div>
+				{this.state.addPic ? (
+					<div>
+						<Addpic></Addpic>
+						<button>确认上传</button>
+					</div>
+				) :
+				null}
 				<div className="mapbox">
 					<button>添加城市</button>
 				</div>
 				<div className="mapbox">
-					<button>添加照片</button>
+					<button onClick={this.addpic}>添加照片</button>
 				</div>
 			<MapWithMarker
 				zoom={5}

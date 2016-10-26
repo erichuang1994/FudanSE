@@ -3,36 +3,23 @@ body{
   padding:0;
   margin:0;
 }
-.vid-container{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
+
+.ale{
+position:absolute;
+background:rgba(0,0,0,0.2);;
+  height: 300px;
+  z-index : 1000;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+
+
 }
-.bgvid.back {
-  position: fixed; right: 0; bottom: 0;
-  min-width: 100%; min-height: 100%;
-  width: auto; height: auto; z-index: -100;
-}
+
 .inner {
   position: absolute;
 }
-.incontainer{
-  width:400px;
-  height:600px;
-  position:absolute;
-  top:calc(50vh - 300px);
-  left:calc(50vw - 200px);
-  overflow:hidden;
-}
-.bgvid.inner{
-  top:calc(-50vh + 200px);
-  left:calc(-50vw + 200px);
-  filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
-  -webkit-filter:blur(10px);
-  -ms-filter: blur(10px);
-  -o-filter: blur(10px);
-  filter:blur(10px);
-}
+
+
 .mapbox{
   margin:0px;
   float: left;
