@@ -19,8 +19,8 @@ body{
 .incontainer{
   width:400px;
   height:600px;
-  position:absolute;
-  top:calc(50vh - 300px);
+  position:relative;
+  top:0;
   left:calc(50vw - 200px);
   overflow:hidden;
 }
