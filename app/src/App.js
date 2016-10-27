@@ -35,7 +35,7 @@ var App = React.createClass({
   render: function() {
     if(this.state.islogin){
         return (
-          <div>
+          <div className="container">
           <Topbar menus={this.props.datas['menus']} setPageNum={this.setPageNum}/>
           {(() => {
             switch (this.state.pageNum) {
