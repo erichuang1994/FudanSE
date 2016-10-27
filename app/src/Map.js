@@ -43,7 +43,7 @@ const MapWithMarker = withGoogleMap(props => (
 var Map = React.createClass({
 	getInitialState:function() {
 		this.height = "700";
-		this.width = "500";
+		this.width = "600";
     return { focusCity: "", addCity: false, addPic: false };
   },
 	addpic:function(){
