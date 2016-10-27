@@ -17,12 +17,12 @@ body{
   position: absolute;
 }
 .incontainer{
-  width:400px;
+  /*width:400px;
   height:600px;
   position:relative;
   top:0;
   left:calc(50vw - 200px);
-  overflow:hidden;
+  overflow:hidden;*/
 }
 .bgvid.inner{
   top:calc(-50vh + 200px);
@@ -34,7 +34,7 @@ body{
   filter:blur(10px);
 }
 .Profliebox{
-  position:absolute;
+  /*position:absolute;*/
   height:100%;
   width:100%;
   font-family:Helvetica;
