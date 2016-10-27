@@ -5,6 +5,7 @@ import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
 import './base.css';
 import './cards.css';
+import './mods.css';
 var News = React.createClass({
 	getInitialState:function() {
     return { edit: false, curNum:0 };
@@ -45,36 +46,36 @@ var News = React.createClass({
 			)
 		};
 		return (
-			<div>
 		<div>
-		{
-			this.props.data.map((card, index) => {
-				return (
-				<div key={index} className="card card9 line-around" >
-					<header className="layout-box media-graphic">
-						<div className="mod-media size-xs news-header">
-							<a href={card.userlink}>
-								<img className="size-xs" alt={card.pictureUrl} src={card.userPhoto}/>
-							</a>
+			<div className="contWrap">
+			{
+				this.props.data.map((card, index) => {
+					return (
+					<div key={index} className="card card9 line-around" >
+						<header className="layout-box media-graphic">
+							<div className="mod-media size-xs news-header">
+								<a href={card.userlink}>
+									<img className="size-xs" alt={card.pictureUrl} src={card.userPhoto}/>
+								</a>
+							</div>
+							<div className="box-col item-list">
+			 		 				<a className="item-main txt-l mct-a txt-cut"><span>{card.userName}</span></a>
+									<div className="item-minor txt-xxs mct-d txt-cut">
+										<span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
+										<span className="from">来自{card.location}</span>
+									</div>
+							</div>
+							<a className="operate-box"><i className="icon-font icon-font-arrow-down txt-s"  onClick={() => this.editfunc(card.id)}></i></a>
+						</header>
+						<div className="news-body">
+							<img className="pure-img" alt={card.pictureUrl} src={card.pictureUrl}/>
 						</div>
-						<div className="box-col item-list">
-		 		 				<a className="item-main txt-l mct-a txt-cut"><span>{card.userName}</span></a>
-								<div className="item-minor txt-xxs mct-d txt-cut">
-									<span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
-									<span className="from">来自{card.location}</span>
-								</div>
-						</div>
-						<a className="operate-box"><i className="icon-font icon-font-arrow-down txt-s"  onClick={() => this.editfunc(card.id)}></i></a>
-					</header>
-					<div className="news-body">
-						<img className="pure-img" alt={card.pictureUrl} src={card.pictureUrl}/>
-					</div>
-				</div>);
-			})
-		}
-		</div>
-		{popup}
-	</div>);
+					</div>);
+				})
+			}
+			</div>
+			{popup}
+		</div>);
 	}
 });
 
