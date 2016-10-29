@@ -10,3 +10,14 @@
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.news-toolbar{
+  list-style: none;
+  margin-bottom: 5px;
+  overflow: hidden;
+  zoom: 1;
+}
+.news-tool{
+  width: 50%;
+  float: left;
+  text-align: center;
+}

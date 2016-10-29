@@ -70,6 +70,10 @@ var News = React.createClass({
 						<div className="news-body">
 							<img className="pure-img" alt={card.pictureUrl} src={card.pictureUrl}/>
 						</div>
+						<ul className="news-toolbar">
+							<li className="news-tool">0赞</li>
+							<li className="news-tool">0评论</li>
+						</ul>
 					</div>);
 				})
 			}
