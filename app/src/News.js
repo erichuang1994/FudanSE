@@ -7,19 +7,23 @@ import './base.css';
 import './cards.css';
 import './mods.css';
 var News = React.createClass({
-	getInitialState:function() {
+  getInitialState:function() {
     return { edit: false, curNum:0 };
   },
+
 	editfunc:function(num){
 		this.setState({edit:true, curNum:num});
 	},
+
 	deleteById:function(){
 		this.props.deleteById(this.state.curNum);
 		this.setState({edit:false});
 	},
+
 	cancelEditfunc:function(num){
 		this.setState({edit:false});
 	},
+	
 	render:function(){
 		if(this.state.edit){
 			var style1={
@@ -27,7 +31,7 @@ var News = React.createClass({
 				 	position: 'fixed',
 				  backgroundColor:'rgba(0, 0, 0, 0.498039)'
 				};
-			var popup=	(
+			var popup = (
 				<div className="ux-popmenu" style={style1}>
 					<div className="content show" style={{bottom: "0px", position: "fixed"}}>
 						<section className="card-combine">
@@ -65,7 +69,7 @@ var News = React.createClass({
 										<span className="from">来自{card.location}</span>
 									</div>
 							</div>
-							<a className="operate-box"><i className="icon-font icon-font-arrow-down txt-s"  onClick={() => this.editfunc(card.id)}></i></a>
+							<a className="operate-box"><i className="icon-font icon-font-arrow-down txt-s"  onClick={() => this.editfunc(index)}></i></a>
 						</header>
 						<div className="news-body">
 							<img className="pure-img" alt={card.pictureUrl} src={card.pictureUrl}/>

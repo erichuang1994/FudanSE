@@ -25,12 +25,15 @@ var App = React.createClass({
       this.setState({toSignup: !this.state.toSignup});
   },
   deleteById:function(num){
+	this.props.datas['news'].splice(num, 1);
+    /*
     for(var i = 0;i<this.props.datas['news'].length;i++){
       if(this.props.datas['news'][i].id===num){
           this.props.datas['news'].splice(i, num);
           break;
       }
     }
+	*/
   },
   render: function() {
     if(this.state.islogin){
