@@ -6,6 +6,20 @@ import 'purecss/build/grids-responsive-min.css';
 import './base.css';
 import './cards.css';
 import './mods.css';
+
+var clickLike = function(a, card) {
+  console.log('like');
+  console.log(a);
+  console.log(card);
+}
+
+var clickComment = function(a, card) {
+  console.log('comment');
+  console.log(a);
+  console.log(a.refs.a);
+  console.log(card);
+}
+
 var News = React.createClass({
   getInitialState:function() {
     return { edit: false, curNum:0 };
@@ -75,9 +89,19 @@ var News = React.createClass({
 							<img className="pure-img" alt={card.pictureUrl} src={card.pictureUrl}/>
 						</div>
 						<ul className="news-toolbar">
-							<li className="news-tool">0赞</li>
-							<li className="news-tool">0评论</li>
+							<li className="news-tool">
+								<a href="javascript:;" onClick={() => {clickLike(this, card)}}>
+									0赞
+								</a>
+							</li>
+							<li className="news-tool">
+								<a href="javascript:;" onClick={() => {clickComment(this, card)}}>
+									0评论
+								</a>
+							</li>
 						</ul>
+						<div ref="a">
+						</div>
 					</div>);
 				})
 			}
