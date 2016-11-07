@@ -67,10 +67,9 @@ def modify_setting(request):
 
 @csrf_exempt
 @login_required
-def add_visited(request):
+def add_visited(request, cityname):
     # / POST
     if (request.method == 'POST'):
-        cityname = request.POST['cityname']
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
             return HttpResponseNotFound("No Such City")
@@ -95,11 +94,10 @@ def visited_cities(request, username):
 
 @csrf_exempt
 @login_required
-def upload(request):
+def upload(request, cityname):
     # image file / POST
     if (request.method == 'POST') :
         traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
-        cityname = request.POST['cityname']
         description = request.POST['description']
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
@@ -111,9 +109,8 @@ def upload(request):
 
 @csrf_exempt
 @login_required
-def pictures_of_city(request, username):
+def pictures_of_city(request, username, cityname):
     if (request.method == 'GET') :
-        cityname = request.POST['cityname']
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
             return HttpResponseNotFound("No Such City!")            
