@@ -7,17 +7,17 @@ import './base.css';
 import './cards.css';
 import './mods.css';
 
-var clickLike = function(a, card) {
+var clickLike = function(dom, index) {
   console.log('like');
-  console.log(a);
-  console.log(card);
+  console.log(index);
 }
 
-var clickComment = function(a, card) {
-  console.log('comment');
-  console.log(a);
-  console.log(a.refs.a);
-  console.log(card);
+var clickComment = function(dom, index) {
+  var commentBox = dom.commentBox[index];
+  commentBox.hidden = !commentBox.hidden;
+  if (!commentBox.hidden) {
+    // add get comment here
+  }
 }
 
 var News = React.createClass({
@@ -39,6 +39,7 @@ var News = React.createClass({
 	},
 	
 	render:function(){
+		this.commentBox = [];
 		if(this.state.edit){
 			var style1={
 					display: 'block',
@@ -90,17 +91,18 @@ var News = React.createClass({
 						</div>
 						<ul className="news-toolbar">
 							<li className="news-tool">
-								<a href="javascript:;" onClick={() => {clickLike(this, card)}}>
+								<a href="javascript:;" onClick={() => {clickLike(this, index)}}>
 									0赞
 								</a>
 							</li>
 							<li className="news-tool">
-								<a href="javascript:;" onClick={() => {clickComment(this, card)}}>
+								<a href="javascript:;" onClick={() => {clickComment(this, index)}}>
 									0评论
 								</a>
 							</li>
 						</ul>
-						<div ref="a">
+						<div className='comment-box' hidden={true} ref={(commentBox => this.commentBox.push(commentBox))}>
+							1
 						</div>
 					</div>);
 				})
