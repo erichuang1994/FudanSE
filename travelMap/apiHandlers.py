@@ -2,7 +2,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseNotFound
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseNotAllowed, HttpResponseNotFound
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from travelMap import models
@@ -174,14 +174,24 @@ def messages_received(request):
 @csrf_exempt
 @login_required
 def followers(request, username):
-    # TODO
-    pass
+    if request.method == 'GET':
+        traveller = getOnlyElement(Traveller.objects.filter(user__username=username))
+        if traveller is None:
+            return HttpResponseBadRequest("No such traveller!")
+        follower_list = [t.user.username for t in traveller.traveller_set.all()]
+        return JsonResponse({"followers": follower_list})
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
 def followings(request, username):
-    # TODO
-    pass
+    if request.method == 'GET':
+        traveller = getOnlyElement(Traveller.objects.filter(user__username=username))
+        if traveller is None:
+            return HttpResponseBadRequest("No such traveller!")
+        following_list = [t.user.username for t in traveller.follows.all()]
+        return JsonResponse({"followings": following_list})
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
