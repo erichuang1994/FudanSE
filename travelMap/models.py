@@ -22,6 +22,6 @@ class Picture(models.Model):
 class Message(models.Model):
     content = models.CharField("Message's content", max_length=1000)
     time = models.DateTimeField("Message send time")
-    traverller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
+    traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
 
