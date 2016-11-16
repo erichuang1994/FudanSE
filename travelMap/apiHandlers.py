@@ -168,8 +168,16 @@ def update_followers(request):
 @csrf_exempt
 @login_required
 def messages_received(request):
-    # username / POST
-    pass
+    message_list = Message.objects.filter(picture__traveller__user=request.user)
+    data = []
+    for m in message_list:
+        data.append({
+            "content": m.content,
+            "time": m.time,
+            "traveller": m.traveller.user.username,
+            "picture": m.picture.pic_file.url
+        })
+    return JsonResponse({"messages": data})
 
 @csrf_exempt
 @login_required
