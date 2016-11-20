@@ -62,8 +62,8 @@ Prefix: /api
 | Add visited city | POST | /user/cities/CITYNAME | | |
 | Upload picture | POST | /user/cities/CITYNAME/pictures | description, image file | |
 | Recent pictures of followings | GET | /user/dashboard | | [pictures] |
-| Follow people | POST | /user/followers | [username] | |
-| Unfollow people | DELETE | /user/followers | [username] | |
+| Follow people | POST | /user/followings/USERNAME | | |
+| Unfollow people | DELETE | /user/followings/USERNAME | | |
 | List of comments received | GET | /user/messages | | [comments] |
 | Update traveller | PUT | /user/settings | password, email | |
 
