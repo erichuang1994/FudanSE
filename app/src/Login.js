@@ -18,12 +18,13 @@ var Login = React.createClass({
 	    body: data
 	  })
 		.then(function(res){
-  	if(res.status === 200){
-    	loginfunc();
-			localStorage.setItem('username', username);
-  	}else if(res.status === 401){
-    	alert("密码错误");
-  	}});
+	  	if(res.status === 200){
+	    	loginfunc();
+				localStorage.setItem('username', username);
+	  	}else if(res.status === 401){
+	    	alert("密码错误");
+	  	}
+		});
 	},
 	render:function(){
 		return (
