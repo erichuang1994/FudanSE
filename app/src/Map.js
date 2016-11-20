@@ -3,7 +3,7 @@ import News from './News';
 import './Map.css';
 import './base.css';
 import Addpic from './Addpic';
-import {newsdata,shanghai,yangzhou} from './newsdata';
+import {shanghai,yangzhou} from './newsdata';
 import {
 	GoogleMap,
 	Marker,

@@ -4,6 +4,8 @@ import 'purecss/build/grids-responsive-min.css';
 import './base.css';
 import './cards.css';
 import './Signup.css';
+import { Link } from 'react-router'
+
 var Signup =React.createClass( {
 	handleSignup:function(event){
 		var data = new FormData();
@@ -45,7 +47,7 @@ var Signup =React.createClass( {
             <input type="password" placeholder="Password" ref="password"/>
             <input type="text" placeholder="Email" ref="email"/>
             <button onClick={this.handleSignup}>Sign up</button>
-            <p>Own an account? <span onClick={this.props.signupfunc}>Log In</span></p>
+            <p>Own an account? <Link to="/login">Login</Link></p>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
 import React from 'react';
 import Topbar from './Topbar';
 import './index.css';
-import Login from './Login'
-import Signup from './Signup'
 import { browserHistory } from 'react-router'
 var App = React.createClass({
   login: function() {
@@ -27,24 +25,12 @@ var App = React.createClass({
   render: function() {
     // show pathname
     console.log(this.props.location.pathname);
-    if(window.authed){
-        return (
-          <div className="container">
-          <Topbar/>
-          {this.props.children}
-          </div>
-        );
-    }else if(this.props.location.pathname==="/signup"){
-      return (
-        <div>
-        {this.props.children}
-        </div>
-      );
-    }else{
-      return (
-        <Login loginfunc={this.login} signupfunc={this.signup}/>
-      );
-    }
+    return (
+      <div className="container">
+      {window.authed?(<Topbar/>):null}
+      {this.props.children}
+      </div>
+    );
   }
 });
 export default App;
