@@ -3,14 +3,6 @@ import Topbar from './Topbar';
 import './index.css';
 import { browserHistory } from 'react-router'
 var App = React.createClass({
-  login: function() {
-     window.authed = true;
-     browserHistory.push("/news");
-  },
-  signup:function(){
-    window.authed = true;
-    browserHistory.push("/news");
-  },
   deleteById:function(num){
 	this.props.datas['news'].splice(num, 1);
     /*
@@ -25,12 +17,20 @@ var App = React.createClass({
   render: function() {
     // show pathname
     console.log(this.props.location.pathname);
-    return (
-      <div className="container">
-      {window.authed?(<Topbar/>):null}
-      {this.props.children}
-      </div>
-    );
+    if(window.authed){
+      return (
+        <div className="container">
+          <Topbar/>
+          {this.props.children}
+        </div>
+      )
+    }else{
+      return(
+        <div>
+          {this.props.children}
+        </div>
+      )
+    }
   }
 });
 export default App;
