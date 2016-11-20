@@ -1,25 +1,15 @@
 import React from 'react';
-import News from './News';
 import Topbar from './Topbar';
 import './index.css';
 import Login from './Login'
 import Signup from './Signup'
-import PagePersonalPage from './PagePersonalPage'
-import Profile from './Profile'
 
 var App = React.createClass({
   login: function() {
      this.setState({islogin: true});
   },
   getInitialState: function() {
-    return { islogin: false, pageNum:0, toSignup: false};
-  },
-  setPageNum:function(num){
-    return function(){
-      this.props.datas['menus'][this.state.pageNum].isactive=false;
-      this.props.datas['menus'][num].isactive=true;
-      this.setState({pageNum:num});
-    }.bind(this);
+    return { islogin: false, toSignup: false};
   },
   signup:function(){
       this.setState({toSignup: !this.state.toSignup});
@@ -39,15 +29,8 @@ var App = React.createClass({
     if(this.state.islogin){
         return (
           <div className="container">
-          <Topbar menus={this.props.datas['menus']} setPageNum={this.setPageNum}/>
-          {(() => {
-            switch (this.state.pageNum) {
-              case 0:   return <News data={this.props.datas['news']} deleteById={this.deleteById}></News>;
-              case 1:   return <PagePersonalPage data={this.props.datas['personal']}></PagePersonalPage>;
-              case 2:   return <Profile></Profile>;
-              default:   return <News data={this.props.datas['news']}></News>;
-            }
-          })()}
+          <Topbar/>
+          {this.props.children}
           </div>
         );
     }else{
@@ -55,8 +38,7 @@ var App = React.createClass({
         return (
           <Signup loginfunc={this.login} signupfunc={this.signup}></Signup>
         );
-      }
-      else {
+      }else {
         return (
           <Login loginfunc={this.login} signupfunc={this.signup}></Login>
         );

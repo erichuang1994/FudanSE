@@ -1,27 +1,17 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import 'purecss';
-import './base.css'
-import './mods.css'
+import './base.css';
+import './mods.css';
+import NavLink from './NavLink'
 class Topbar extends Component {
   render() {
-    var setPageNum = this.props.setPageNum;
     return (
       <div className="topBarWrap">
         <div className="home-sub-nav layout-box">
-            {
-              this.props.menus.map(function(menu) {
-                if(menu.isactive){
-                return (
-                  <a key={menu.num} href="javascript:;" className="item box-col isActive" onClick={setPageNum(menu.num)}>{menu.name}</a>
-                );
-              }else{
-                return (
-                  <a key={menu.num} href="javascript:;" className="item box-col" onClick={setPageNum(menu.num)}>{menu.name}</a>
-                );
-              }
-              })
-            }
+            <NavLink to="/news">首页</NavLink>
+            <NavLink to="/personal">我的足迹</NavLink>
+            <NavLink to="/profile">个人中心</NavLink>
         </div>
       </div>
     );

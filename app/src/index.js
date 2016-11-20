@@ -1,18 +1,22 @@
 import React from 'react';
+import News from './News';
 import ReactDOM from 'react-dom';
 import App from './App';
+import PagePersonalPage from './PagePersonalPage'
 import {newsdata} from './newsdata';
+import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
+import Profile from './Profile'
+
 var personal = [newsdata[2]];
-var genMenus = function(name, href, isactive, num) {
-  return {name: name, href: href, isactive: isactive, num: num}
-};
-var menus = [
-  genMenus("首页", "news", true, 0),
-  genMenus("我的足迹", "news", false, 1),
-  genMenus("个人中心", "messgae", false, 2)
-];
 
 ReactDOM.render(
-	<App datas={{'menus':menus,'news':newsdata, 'personal':personal}}/>,
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRedirect to="/news" />
+      <Route path="/news" component={()=><News data={newsdata}/>} data={newsdata}/>
+      <Route path="/personal" component={PagePersonalPage} data={personal}/>
+      <Route path="/profile" component={Profile}/>
+    </Route>
+  </Router>,
 	document.getElementById('root')
 );

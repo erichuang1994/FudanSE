@@ -98,7 +98,7 @@ var News = React.createClass({
 	cancelEditfunc:function(num){
 		this.setState({edit:false});
 	},
-	
+
 	render:function(){
 		this.commentBox = [];
 		if(this.state.edit){
