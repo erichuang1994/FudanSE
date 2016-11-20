@@ -32,7 +32,7 @@ def signup(request):
         Traveller.objects.create(user=user)
         auth.login(request, user)
         return HttpResponse()
-    return HttpResponseNotFound()
+    return HttpResponseNotAllowed(["POST"])
     
 @csrf_exempt
 def login(request):
@@ -46,7 +46,7 @@ def login(request):
             return HttpResponse()
         else:
             return HttpResponse('username or password incorrect!', status=401)
-    return HttpResponseNotFound()
+    return HttpResponseNotAllowed(["POST"])
 
 @csrf_exempt
 @login_required
@@ -54,7 +54,7 @@ def logout(request):
     if (request.method == 'POST'):
         auth.logout(request)
         return HttpResponse()
-    return HttpResponseNotFound()
+    return HttpResponseNotAllowed(["POST"])
 
 @csrf_exempt
 @login_required
@@ -76,7 +76,7 @@ def add_visited(request, cityname):
         traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
         traveller.cities.add(city)
         return HttpResponse()
-    return HttpResponseNotFound()
+    return HttpResponseNotAllowed(["POST"])
 
 @csrf_exempt
 @login_required
@@ -86,11 +86,9 @@ def visited_cities(request, username):
         if (user is None):
             return HttpResponseNotFound("No Such User!")
         traveller = getOnlyElement(Traveller.objects.filter(user=user))
-        result = []
-        for x in list(traveller.cities.all()):
-            result.append(x.name)
-        return HttpResponse(dumps(result))
-    return HttpResponseNotFound()
+        result = [city.name for city in traveller.cities.all()]
+        return JsonResponse({"cities": result})
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
@@ -105,18 +103,32 @@ def upload(request, cityname):
         picture = Picture.objects.create(description=description, like_count=0, time=timezone.now(), traveller=traveller, city=city, pic_file=request.FILES['picture'])
         print(picture.id)
         return HttpResponse()
-    return HttpResponseNotFound()    
+    return HttpResponseNotAllowed(["POST"])
 
 @csrf_exempt
 @login_required
 def pictures_of_city(request, username, cityname):
     if (request.method == 'GET') :
-        city = getOnlyElement(City.objects.filter(name=cityname))
-        if (city is None) :
-            return HttpResponseNotFound("No Such City!")            
-        pictures = Picture.objects.filter(city=city)
-        return HttpResponse(pictures)        
-    return HttpResponseNotFound()
+        traveller = getOnlyElement(Traveller.objects.filter(user__username=username))
+        if traveller is None:
+            return HttpResponseNotFound("No Such User!")
+
+        city = getOnlyElement(traveller.cities.filter(name=cityname))
+        if city is None:
+            return HttpResponseNotFound("No such visited city of the user!") 
+
+        data = []
+        for p in Picture.objects.filter(traveller=traveller, city=city):
+            data.append({
+                "id": p.id,
+                "description": p.description,
+                "like_count": p.like_count,
+                "time": p.time,
+                "url": p.pic_file.url
+            })
+        return JsonResponse({"pictures": data})
+
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
@@ -125,59 +137,85 @@ def get_picture(request, picture_id):
         picture = getOnlyElement(Picture.objects.filter(id=picture_id))
         if (picture is None) :
             return HttpResponseNotFound("No Such Picture!")
-        return HttpResponse(Picture)
-    return HttpResponseNotFound()
+        return JsonResponse({
+            "username": picture.traveller.user.username,
+            "cityname": picture.city.name,
+            "description": picture.description,
+            "like_count": picture.like_count,
+            "time": picture.time,
+            "url": picture.pic_file.url
+        })
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
 def comments_of_picture(request, picture_id):
     if (request.method == 'GET'):
-        picture = getOnlyElement(
-            Picture.objects.filter(id=picture_id))
+        picture = getOnlyElement(Picture.objects.filter(id=picture_id))
         if (picture is None) :
             return HttpResponseNotFound("No Such Picture!")
-        messages = Message.objects.filter(picture=picture)
-        return HttpResponse(messages)
-    return HttpResponseNotFound()
+
+        data = []
+        for m in Message.objects.filter(picture=picture):
+            data.append({
+                "content": m.content,
+                "time": m.time,
+                "traveller": m.traveller.user.username,
+            })
+        return JsonResponse({"messages": data})
+
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
-def get_traverller(request, username):
+def get_traveller(request, username):
     if (request.method == 'GET'):
         user = getOnlyElement(User.objects.filter(username=username))
         if (user is None):
             return HttpResponseBadRequest("No Such User!")
-        result = {"username" : username, "email" : user.email}
-        return HttpResponse(dumps(result))
-    return HttpResponseNotFound()
+        return JsonResponse({
+            "username" : username,
+            "email" : user.email
+        })
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
-def update_followers(request):
+def update_followings(request, username):
     user = request.user
-    if (request.method == 'GET'):
+    if (request.method == 'POST'):
         traveller = getOnlyElement(Traveller.objects.filter(user=user))
-        traveller.follows.add(request.POST['username'])
+        following = getOnlyElement(Traveller.objects.filter(user__username=username))
+        if following is None:
+            return HttpResponseBadRequest("No Such User!")
+        traveller.follows.add(following)
         return HttpResponse()
+
     if (request.method == 'DELETE'):
         traveller = getOnlyElement(Traveller.objects.filter(user=user))
-        traveller.follows.remove(request.DELETE['username'])
+        following = getOnlyElement(Traveller.objects.filter(user__username=username))
+        if following is None:
+            return HttpResponseBadRequest("No Such User!")
+        traveller.follows.remove(following)
         return HttpResponse()
-    return HttpResponseNotFound()
+
+    return HttpResponseNotAllowed(["POST", "DELETE"])
 
 @csrf_exempt
 @login_required
 def messages_received(request):
-    message_list = Message.objects.filter(picture__traveller__user=request.user)
-    data = []
-    for m in message_list:
-        data.append({
-            "content": m.content,
-            "time": m.time,
-            "traveller": m.traveller.user.username,
-            "picture": m.picture.pic_file.url
-        })
-    return JsonResponse({"messages": data})
+    if request.method == 'GET':
+        message_list = Message.objects.filter(picture__traveller__user=request.user)
+        data = []
+        for m in message_list:
+            data.append({
+                "content": m.content,
+                "time": m.time,
+                "traveller": m.traveller.user.username,
+                "picture": m.picture.pic_file.url
+            })
+        return JsonResponse({"messages": data})
+    return HttpResponseNotAllowed(["GET"])
 
 @csrf_exempt
 @login_required
