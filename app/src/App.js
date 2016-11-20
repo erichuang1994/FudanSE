@@ -1,6 +1,7 @@
 import React from 'react';
 import Topbar from './Topbar';
-import './index.css';
+import './App.css';
+import './mods.css';
 import { browserHistory } from 'react-router'
 var App = React.createClass({
   deleteById:function(num){
@@ -21,7 +22,9 @@ var App = React.createClass({
       return (
         <div className="container">
           <Topbar/>
+          <div className="contWrap">
           {this.props.children}
+          </div>
         </div>
       )
     }else{
