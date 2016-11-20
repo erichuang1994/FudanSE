@@ -3,16 +3,15 @@ import Topbar from './Topbar';
 import './index.css';
 import Login from './Login'
 import Signup from './Signup'
-
+import { browserHistory } from 'react-router'
 var App = React.createClass({
   login: function() {
-     this.setState({islogin: true});
-  },
-  getInitialState: function() {
-    return { islogin: false, toSignup: false};
+     window.authed = true;
+     browserHistory.push("/news");
   },
   signup:function(){
-      this.setState({toSignup: !this.state.toSignup});
+    window.authed = true;
+    browserHistory.push("/news");
   },
   deleteById:function(num){
 	this.props.datas['news'].splice(num, 1);
@@ -26,23 +25,25 @@ var App = React.createClass({
 	*/
   },
   render: function() {
-    if(this.state.islogin){
+    // show pathname
+    console.log(this.props.location.pathname);
+    if(window.authed){
         return (
           <div className="container">
           <Topbar/>
           {this.props.children}
           </div>
         );
+    }else if(this.props.location.pathname==="/signup"){
+      return (
+        <div>
+        {this.props.children}
+        </div>
+      );
     }else{
-      if (this.state.toSignup) {
-        return (
-          <Signup loginfunc={this.login} signupfunc={this.signup}></Signup>
-        );
-      }else {
-        return (
-          <Login loginfunc={this.login} signupfunc={this.signup}></Login>
-        );
-      }
+      return (
+        <Login loginfunc={this.login} signupfunc={this.signup}/>
+      );
     }
   }
 });
