@@ -127,7 +127,6 @@ var News = React.createClass({
 		};
 		return (
 		<div>
-			<div className="contWrap">
 			{
 				this.props.data.map((card, index) => {
 					return (
@@ -135,7 +134,6 @@ var News = React.createClass({
 					);
 				})
 			}
-			</div>
 			{popup}
 		</div>);
 	}
