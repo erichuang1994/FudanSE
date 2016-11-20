@@ -242,6 +242,24 @@ def followings(request, username):
 @csrf_exempt
 @login_required
 def dashboard(request):
-    # TODO
-    pass
+    if request.method == "GET":
+        traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
+
+        picture_list = []
+        for following in traveller.follows.all():
+            picture_list += Picture.objects.filter(traveller=following)
+
+        data = []
+        for p in picture_list:
+            data.append({
+                "username": p.traveller.user.username,
+                "cityname": p.city.name,
+                "description": p.description,
+                "like_count": p.like_count,
+                "time": p.time,
+                "url": p.pic_file.url
+            })
+        return JsonResponse({"pictures": data})
+
+    return HttpResponseNotAllowed(["GET"])
 
