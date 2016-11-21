@@ -1,9 +1,17 @@
+@charset "UTF-8";@font-face {
+    font-family: wb440;
+    font-weight: 400;
+    font-style: normal;
+    src: url(../../public/font/wb.woff);
+    src: url(../../public/font/wb.woff) format("embedded-opentype"),url(../../public/font/wb.woff) format("woff"),url(../../public/font/wbfont-regular-webfont.ttf) format("truetype")
+}
+
 .home-sub-nav {
     position: relative;
     z-index: 1;
     margin-bottom: 10px;
     width: 100%;
-    background: #ffffff;
+    background: #f5f5f5;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -70,5 +78,44 @@
     z-index: 10;
 }
 .contWrap {
-    padding: 50px 0 0 0;
+    padding: 90px 0 0 0;
+}
+.iconf {
+    font-family: wb440;
+    color: #444;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.iconf_navbar_refresh::before {
+    content: "\21bb";
+}
+.iconf_navbar_search::before {
+    content: "\44";
+}
+.iconf_navbar_setting::before {
+    content: "\42";
+}
+.iconf_navbar_compose::before {
+    content: "\47";
+}
+.module-topbar .drop-title .icon-font {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto;
+    font-size: .8215rem;
+    line-height: 29px;
+    text-align: center;
+    color: #8c00ff;
+}
+.fr {
+    float: right;
+}
+.module-topbar .iconf {
+    width: 46px;
+    font-size: 28px;
+    height: 44px;
+    line-height: 44px;
+    color: #444;
+    text-align: center;
 }

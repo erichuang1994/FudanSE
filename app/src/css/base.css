@@ -93,3 +93,24 @@ line-height: 120%;
 .base-button{
   margin:10px;
 }
+.module-topbar .drop-title {
+    position: relative;
+    display: inline-block;
+    margin: 6px -12px 7px 12px;
+    border: transparent solid 1px;
+    padding: 0 13px 0 0;
+    max-width: 40%;
+}
+.fl {
+    float: left;
+}
+.module-topbar.home-topbar .drop-title .title {
+    text-shadow: 0 1px 0 #fff;
+}
+.module-topbar .drop-title .title {
+    font-size: 1.125rem;
+    line-height: 29px;
+}
+a, img {
+    -webkit-tap-highlight-color: rgba(255,255,255,0);
+}
