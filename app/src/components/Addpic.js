@@ -1,9 +1,9 @@
 import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
-import './base.css';
-import './cards.css';
-import './Map.css';
+import '../css/base.css';
+import '../css/cards.css';
+import '../css/Map.css';
 var Addpic = React.createClass( {
   previewImage:function(file, prvid="prvid"){
     /* file：file控件
@@ -40,7 +40,7 @@ var Addpic = React.createClass( {
             showPrvImg(file.value);
         }
     }
- 
+
     function validateImg(data) {
         var pos = data.indexOf(",") + 1;
         for (var e in filters) {
@@ -50,7 +50,7 @@ var Addpic = React.createClass( {
         }
         return null;
     }
- 
+
     function showPrvImg(src) {
         var img = document.createElement("img");
         img.src = src;

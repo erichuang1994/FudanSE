@@ -1,13 +1,13 @@
 import React from 'react';
-import News from './News';
+import News from './components/News';
 import ReactDOM from 'react-dom';
-import App from './App';
-import PagePersonalPage from './PagePersonalPage'
-import {newsdata} from './newsdata';
+import App from './components/App';
+import PagePersonalPage from './components/PagePersonalPage'
+import {newsdata} from './components/newsdata';
 import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-router'
-import Profile from './Profile'
-import Login from './Login'
-import Signup from './Signup'
+import Profile from './components/Profile'
+import Login from './components/Login'
+import Signup from './components/Signup'
 var personal = [newsdata[2]];
 
 function requireAuth(nextState, replace) {

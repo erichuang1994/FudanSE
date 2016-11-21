@@ -1,7 +1,7 @@
 import React from 'react';
 import Topbar from './Topbar';
-import './App.css';
-import './mods.css';
+import '../css/App.css';
+import '../css/mods.css';
 import { browserHistory } from 'react-router'
 var App = React.createClass({
   deleteById:function(num){

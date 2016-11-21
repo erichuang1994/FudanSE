@@ -2,8 +2,8 @@
 import React from 'react'
 import { Link } from 'react-router'
 import 'purecss';
-import './base.css'
-import './mods.css'
+import '../css/base.css'
+import '../css/mods.css'
 
 export default React.createClass({
   render() {

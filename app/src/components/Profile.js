@@ -1,9 +1,9 @@
 import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
-import './base.css';
-import './cards.css';
-import './Profile.css';
+import '../css/base.css';
+import '../css/cards.css';
+import '../css/Profile.css';
 var Profile = React.createClass( {
   getInitialState:function(){
     return {email: ""};

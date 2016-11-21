@@ -1,11 +1,11 @@
 import React from 'react';
 // import logo from './logo.svg';
-import './News.css';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
-import './base.css';
-import './cards.css';
-import './mods.css';
+import '../css/News.css';
+import '../css/base.css';
+import '../css/cards.css';
+import '../css/mods.css';
 
 var NewsComment = React.createClass({
   render: function() {

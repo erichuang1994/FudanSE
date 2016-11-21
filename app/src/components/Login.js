@@ -1,9 +1,9 @@
 import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
-import './base.css';
-import './cards.css';
-import './login.css';
+import '../css/base.css';
+import '../css/cards.css';
+import '../css/login.css';
 import { Link } from 'react-router'
 var Login = React.createClass({
 	handleLogin:function(event) {

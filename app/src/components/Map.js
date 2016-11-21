@@ -1,7 +1,7 @@
 import React from 'react';
 import News from './News';
-import './Map.css';
-import './base.css';
+import '../css/Map.css';
+import '../css/base.css';
 import Addpic from './Addpic';
 import {shanghai,yangzhou} from './newsdata';
 import {

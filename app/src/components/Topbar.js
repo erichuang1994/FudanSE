@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import 'purecss';
-import './base.css';
-import './mods.css';
+import '../css/base.css';
+import '../css/mods.css';
 import NavLink from './NavLink'
 class Topbar extends Component {
   render() {

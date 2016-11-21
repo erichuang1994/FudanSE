@@ -1,9 +1,9 @@
 import React from 'react';
 import 'purecss';
 import 'purecss/build/grids-responsive-min.css';
-import './base.css';
-import './cards.css';
-import './Signup.css';
+import '../css/base.css';
+import '../css/cards.css';
+import '../css/Signup.css';
 import { Link } from 'react-router'
 
 var Signup =React.createClass( {
