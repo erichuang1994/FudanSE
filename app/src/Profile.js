@@ -28,10 +28,16 @@ var Profile = React.createClass( {
     var data = new FormData();
     data.append("password",this.refs.password.value);
     data.append("email",this.refs.email.value);
-    fetch("/api/settings", {
+    console.log(this.refs.password.value);
+    console.log(this.refs.email.value);
+    fetch("/api/user/settings", {
       credentials: 'include',
       method: 'put',
-      body: data
+      body: JSON.stringify({
+          password:data.get('password'),
+          email:data.get('email'),
+        }
+      )
     })
     .then(function(res){
     if(res.status === 200){
@@ -40,6 +46,9 @@ var Profile = React.createClass( {
       alert("修改失败");
     }});
   },
+  handleChange(event) {
+    this.setState({email: event.target.value});
+  },
 	render(){
 		return (
         <div className="incontainer">
@@ -47,7 +56,7 @@ var Profile = React.createClass( {
             <h1>个人资料</h1>
             <input type="password" placeholder="Old Password" />
             <input type="password" placeholder="New Password" ref="password"/>
-            <input type="text" placeholder="Email" ref="email" value={this.state.email}/>
+            <input type="text" placeholder="Email" ref="email" value={this.state.email} onChange={this.handleChange}/>
             <input type="text" placeholder="Age" />
             <select name="Gender">
               <option value="male">Male</option>

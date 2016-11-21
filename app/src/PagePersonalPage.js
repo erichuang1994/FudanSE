@@ -22,6 +22,19 @@ var PagePersonalPage = React.createClass({
 			console.log(json);
 			// setState({email:json.email});
 		});
+		fetch("/api/travellers/"+ username+ "/followings", {
+			credentials: 'include',
+			method: 'get'
+		})
+		.then(function(res){
+		if(res.status === 200){
+			return res.json();
+		}else if(res.status === 500){
+			alert("获取信息失败");
+		}}).then(function(json){
+			console.log(json);
+			// setState({email:json.email});
+		});
 	},
 	render : function() {
 		return (
