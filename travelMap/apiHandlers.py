@@ -59,11 +59,16 @@ def logout(request):
 @csrf_exempt
 @login_required
 def modify_setting(request):
-    # password
-    user = request.user
-    user.set_password(request.POST['password'])
-    user.save()
-    return HttpResponse()
+    if request.method == "PUT":
+        data = loads(request.body.decode("utf-8"))
+        user = request.user
+        if "password" in data:
+            user.set_password(data['password'])
+        if "email" in data:
+            user.email = data["email"]
+        user.save()
+        return HttpResponse()
+    return HttpResponseNotAllowed(["PUT"])
 
 @csrf_exempt
 @login_required
