@@ -19,8 +19,8 @@ var Login = React.createClass({
 	  })
 		.then(function(res){
 	  	if(res.status === 200){
-	    	loginfunc();
 				localStorage.setItem('username', username);
+	    	loginfunc();
 	  	}else if(res.status === 401){
 	    	alert("密码错误");
 	  	}
