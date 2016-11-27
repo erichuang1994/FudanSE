@@ -98,6 +98,15 @@
 .iconf_navbar_compose::before {
     content: "\47";
 }
+.iconf_navbar_accountedit::before{
+  content:"\48"
+}
+.iconf_navbar_profileedit::before{
+  content:"\45"
+}
+.iconf_navbar_friendsearch::before {
+    content: "\46"
+}
 .module-topbar .drop-title .icon-font {
     position: absolute;
     top: 0;
