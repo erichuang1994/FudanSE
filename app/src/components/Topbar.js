@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import 'purecss';
 import '../css/mods.css';
 import '../css/base.css';
-import NavLink from './NavLink'
-import { Link } from 'react-router'
+import NavLink from './NavLink';
+import { Link } from 'react-router';
 var AddFriend = React.createClass({
   handleAddFriend:function(){
     var username = this.refs.username.value;
@@ -37,6 +37,17 @@ var AddFriend = React.createClass({
   );
   }
 });
+var Navbar = React.createClass({
+  render:function(){
+    return (
+      <div className="home-sub-nav layout-box">
+          <NavLink to="/news">首页</NavLink>
+          <NavLink to="/personal">我的足迹</NavLink>
+          <NavLink to="/profile">个人中心</NavLink>
+      </div>
+    )
+  }
+});
 var Topbar = React.createClass( {
   getInitialState: function() {
     return {isAddFriendDiag: false};
@@ -52,22 +63,14 @@ var Topbar = React.createClass( {
             <a className="fr iconf iconf_navbar_compose"></a>
             <div className="fl drop-title"><p className="title txt-cut">{localStorage.getItem('username')}</p></div>
           </div>
-          <div className="home-sub-nav layout-box">
-              <NavLink to="/news">首页</NavLink>
-              <NavLink to="/personal">我的足迹</NavLink>
-              <NavLink >个人中心</NavLink>
-          </div>
+          <Navbar/>
         </div>
       );
     }else{
       return (
         <div className="topBarWrap">
           <AddFriend cancelAddFriend={()=>{this.setState({isAddFriendDiag: false})}}/>
-          <div className="home-sub-nav layout-box">
-              <NavLink to="/news">首页</NavLink>
-              <NavLink to="/personal">我的足迹</NavLink>
-              <NavLink >个人中心</NavLink>
-          </div>
+          <Navbar/>
         </div>
       );
     }
