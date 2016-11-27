@@ -8,6 +8,7 @@ import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-ro
 import Setting from './components/Setting'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Profile from './components/Profile'
 var personal = [newsdata[2]];
 
 function requireAuth(nextState, replace) {
@@ -33,6 +34,7 @@ ReactDOM.render(
       <Route path="/news" component={()=><News data={newsdata}/>} onEnter={requireAuth}/>
       <Route path="/personal" component={PagePersonalPage} onEnter={requireAuth}/>
       <Route path="/setting" component={Setting} onEnter={requireAuth}/>
+      <Route path="/profile" component={Profile} onEnter={requireAuth}/>
       <Route path="/login" component={()=><Login loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/signup" component={()=><Signup loginfunc={login} signupfunc={signup}/>}/>
       <IndexRedirect to="login"/>

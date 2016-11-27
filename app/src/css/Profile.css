@@ -23,6 +23,7 @@ body{
   top:0;
   left:calc(50vw - 200px);
   overflow:hidden;*/
+  height:100%;
 }
 .bgvid.inner{
   top:calc(-50vh + 200px);

@@ -2,6 +2,7 @@ import React from 'react';
 import Topbar from './Topbar';
 import '../css/App.css';
 import '../css/mods.css';
+import '../css/base.css';
 import { browserHistory } from 'react-router'
 var App = React.createClass({
   deleteById:function(num){
