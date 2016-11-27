@@ -10,7 +10,7 @@ class Topbar extends Component {
     return (
       <div className="topBarWrap">
         <div className="home-topbar module-topbar">
-          <Link to="/profile" className="fr iconf iconf_navbar_accountedit"></Link>
+          <Link to="/setting" className="fr iconf iconf_navbar_accountedit"></Link>
           <a className="fr iconf iconf_navbar_friendsearch"></a>
           <a className="fr iconf iconf_navbar_compose"></a>
           <div className="fl drop-title"><p className="title txt-cut">Wallace</p><i className="icon-font icon-font-arrow-down"></i></div>

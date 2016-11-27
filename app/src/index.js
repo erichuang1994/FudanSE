@@ -5,7 +5,7 @@ import App from './components/App';
 import PagePersonalPage from './components/PagePersonalPage'
 import {newsdata} from './components/newsdata';
 import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-router'
-import Profile from './components/Profile'
+import Setting from './components/Setting'
 import Login from './components/Login'
 import Signup from './components/Signup'
 var personal = [newsdata[2]];
@@ -32,7 +32,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <Route path="/news" component={()=><News data={newsdata}/>} onEnter={requireAuth}/>
       <Route path="/personal" component={PagePersonalPage} onEnter={requireAuth}/>
-      <Route path="/profile" component={Profile} onEnter={requireAuth}/>
+      <Route path="/setting" component={Setting} onEnter={requireAuth}/>
       <Route path="/login" component={()=><Login loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/signup" component={()=><Signup loginfunc={login} signupfunc={signup}/>}/>
       <IndexRedirect to="login"/>
