@@ -3,8 +3,8 @@ import '../css/Profile.css'
 import '../css/base.css'
 import { Link } from 'react-router';
 var Profile = React.createClass( {
-  getFetch:function(url, callback){
-    fetch(url, {
+  getFetch(url, callback){
+    return fetch(url, {
       credentials: 'include',
       method: 'get'
     })
@@ -14,20 +14,25 @@ var Profile = React.createClass( {
     }else if(res.status === 500){
       alert("获取信息失败");
     }}).then(function(json){
-      callback(json);
+      return callback(json);
     });
   },
-  getInitialState:function(){
+  getInitialState(){
 		return {cityNum:0, followings:0, followers:0};
 	},
-  componentWillMount:function(){
+  componentDidMount(){
     var username = localStorage.username;
     var setState = this.setState.bind(this);
-    this.getFetch("/api/travellers/"+ username+ "/followers" ,(json)=>{setState({followers:json.followers.length});})
-    this.getFetch("/api/travellers/"+ username+ "/followings" ,(json)=>{setState({followings:json.followings.length});})
-    this.getFetch("/api/travellers/"+ username+ "/cities" ,(json)=>{setState({cityNum:json.cities.length});})
+    var p1 = this.getFetch("/api/travellers/"+ username+ "/followers" ,(json)=>{return {followers:json.followers.length};})
+    var p2 = this.getFetch("/api/travellers/"+ username+ "/followings" ,(json)=>{return {followings:json.followings.length};})
+    var p3 = this.getFetch("/api/travellers/"+ username+ "/cities" ,(json)=>{return {cityNum:json.cities.length};})
+    // 一次性更新state避免re render三次
+    Promise.all([p1, p2, p3]).then(values=>{
+      setState(Object.assign(...values));
+    });
   },
 	render(){
+    console.log("render");
 		return (
         <div className="incontainer">
           <div className="card card2 line-around ">
@@ -36,11 +41,11 @@ var Profile = React.createClass( {
                 <div className="mct-a txt-s">{this.state.cityNum}</div>
                 <div className="mct-a txt-s txt-bottom">去过</div>
               </Link>
-               <Link className="box-col line-separate">
+               <Link className="box-col line-separate" to="/followings">
                  <div className="mct-a txt-s">{this.state.followings}</div>
                  <div className="mct-a txt-s txt-bottom">关注</div>
                </Link>
-               <Link className="box-col line-separate">
+               <Link className="box-col line-separate" to="/followers">
                  <div className="mct-a txt-s">{this.state.followers}</div>
                  <div className="mct-a txt-s txt-bottom">粉丝</div>
                </Link>
