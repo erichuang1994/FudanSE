@@ -4,11 +4,14 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import PagePersonalPage from './components/PagePersonalPage'
 import {newsdata} from './components/newsdata';
-import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-router'
-import Setting from './components/Setting'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import Profile from './components/Profile'
+import { Router, Route, browserHistory, IndexRedirect, Redirect } from 'react-router';
+import Setting from './components/Setting';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Profile from './components/Profile';
+import Followings from './components/Followings';
+import Followers from './components/Followers';
+
 var personal = [newsdata[2]];
 
 function requireAuth(nextState, replace) {
@@ -34,7 +37,10 @@ ReactDOM.render(
       <Route path="/news" component={()=><News data={newsdata}/>} onEnter={requireAuth}/>
       <Route path="/personal" component={PagePersonalPage} onEnter={requireAuth}/>
       <Route path="/setting" component={Setting} onEnter={requireAuth}/>
-      <Route path="/profile" component={Profile} onEnter={requireAuth}/>
+      <Route path="/profile" component={Profile} onEnter={requireAuth}>
+        <Route path="/profile/followings" component={Followings} onEnter={requireAuth}/>
+        <Route path="/profile/followers" component={Followers} onEnter={requireAuth}/>
+      </Route>
       <Route path="/login" component={()=><Login loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/signup" component={()=><Signup loginfunc={login} signupfunc={signup}/>}/>
       <IndexRedirect to="login"/>

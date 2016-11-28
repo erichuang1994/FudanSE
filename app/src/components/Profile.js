@@ -41,16 +41,17 @@ var Profile = React.createClass( {
                 <div className="mct-a txt-s">{this.state.cityNum}</div>
                 <div className="mct-a txt-s txt-bottom">去过</div>
               </Link>
-               <Link className="box-col line-separate" to="/followings">
+               <Link className="box-col line-separate" to="/profile/followings">
                  <div className="mct-a txt-s">{this.state.followings}</div>
                  <div className="mct-a txt-s txt-bottom">关注</div>
                </Link>
-               <Link className="box-col line-separate" to="/followers">
+               <Link className="box-col line-separate" to="/profile/followers">
                  <div className="mct-a txt-s">{this.state.followers}</div>
                  <div className="mct-a txt-s txt-bottom">粉丝</div>
                </Link>
              </div>
           </div>
+          {this.props.children}
         </div>
     );
 	 }
