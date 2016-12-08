@@ -52,6 +52,7 @@ var Topbar = React.createClass( {
   getInitialState: function() {
     return {isAddFriendDiag: false};
   },
+  
   render:function() {
     const isAddFriendDiag = this.state.isAddFriendDiag;
     if(!isAddFriendDiag){
@@ -60,7 +61,7 @@ var Topbar = React.createClass( {
           <div className="home-topbar module-topbar">
             <Link to="/setting" className="fr iconf iconf_navbar_accountedit"></Link>
             <a className="fr iconf iconf_navbar_friendsearch" onClick={()=>{this.setState({isAddFriendDiag: true});}}></a>
-            <a className="fr iconf iconf_navbar_compose"></a>
+            <Link to="/addpic" className="fr iconf iconf_navbar_compose"></Link>
             <div className="fl drop-title"><p className="title txt-cut">{localStorage.getItem('username')}</p></div>
           </div>
           <Navbar/>

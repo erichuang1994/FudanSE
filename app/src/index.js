@@ -11,6 +11,8 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Followings from './components/Followings';
 import Followers from './components/Followers';
+import Addpic from './components/Addpic';
+import Map from './components/Map';
 
 var personal = [newsdata[2]];
 
@@ -43,6 +45,8 @@ ReactDOM.render(
       </Route>
       <Route path="/login" component={()=><Login loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/signup" component={()=><Signup loginfunc={login} signupfunc={signup}/>}/>
+      <Route path="/addpic" component={Addpic} onEnter={requireAuth}/>
+      <Route path="/map" component={Map} onEnter={requireAuth}/>
       <IndexRedirect to="login"/>
       <Redirect path="*" to="login"/>
     </Route>
