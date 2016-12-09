@@ -27,12 +27,12 @@ var Addpic = React.createClass( {
         "png"   : "iVBORw"
     }
     var prvbox = document.getElementById(prvid);
-    var test  = document.getElementById("root");
+    //var test  = document.getElementById("root");
     var pic = document.getElementById("files");
 
-    console.log(test);
-    console.log(file);
-    console.log(pic.value);
+    //console.log(test);
+    //console.log(file);
+    //console.log(pic.value);
     //prvbox.innerHTML = "";
     var picname = pic.value;
     if (window.FileReader) { // html5方案
@@ -40,18 +40,24 @@ var Addpic = React.createClass( {
             var fr = new FileReader();
             fr.onload = function(e) {
                 var src = e.target.result;
-                var name = f;
+                //var src = fr.result;
+                
                 if (!validateImg(src)) {
                     alert(tip);
                     showPrvImg("");
                 } else {
-                    imgsrc = src;
-                    //console.log(imgsrc);
+                    
                     showPrvImg(picname);
-                    this.addCity();
+                    this.setCityTrue();
                 }
             }.bind(this);
             fr.readAsDataURL(f);
+            //sleep(5000);
+            //imgsrc = fr.result;
+            //console.log(f);
+            imgsrc = f;
+            //console.log(fr.result);
+            //console.log(fr);
         }
     } else { // 降级处理
         if ( !/\.jpg$|\.png$|\.gif$/i.test(file.value) ) {
@@ -60,6 +66,7 @@ var Addpic = React.createClass( {
             showPrvImg(file.value);
         }
     }
+
 
     function validateImg(data) {
         var pos = data.indexOf(",") + 1;
@@ -74,17 +81,20 @@ var Addpic = React.createClass( {
     function showPrvImg(name) {
         prvbox.innerText = name;
     }
+
+
+
   },
   handleProfit:function(event) {
     var data = new FormData();
 
   },
   roadPic:function(){
-    let ele = document.getElementById('files');
+    var ele = document.getElementById('files');
     ele.click();
   },
 
-  addCity:function(){
+  setCityTrue:function(){
     this.setState({addCity: true});
   },
   handleAddCity:function(){
@@ -111,7 +121,8 @@ var Addpic = React.createClass( {
     var city = this.refs.cityname.value;
     this.handleAddCity();
     data.append("description","");
-    data.append("image",imgsrc);
+    data.append("picture",imgsrc);
+    //console.log(imgsrc);
     fetch("/api/user/cities/" + city + "/pictures", {
       credentials: 'include',
       method: 'post',
