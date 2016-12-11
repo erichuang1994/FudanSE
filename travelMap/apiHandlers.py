@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest, HttpResponseNotAllowed, HttpResponseNotFound
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
 from travelMap import models
 from travelMap.mockViews import *
 from travelMap.models import *
@@ -18,7 +17,6 @@ def getOnlyElement(a):
         return None
     return a[0]
 
-@csrf_exempt
 def signup(request):
     # username, password, email
     if (request.method == 'POST'):
@@ -34,7 +32,6 @@ def signup(request):
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
     
-@csrf_exempt
 def login(request):
     # username, password
     if (request.method == 'POST') :
@@ -48,7 +45,6 @@ def login(request):
             return HttpResponse('username or password incorrect!', status=401)
     return HttpResponseNotAllowed(["POST"])
 
-@csrf_exempt
 @login_required
 def logout(request):
     if (request.method == 'POST'):
@@ -56,7 +52,6 @@ def logout(request):
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
 
-@csrf_exempt
 @login_required
 def modify_setting(request):
     if request.method == "PUT":
@@ -70,7 +65,6 @@ def modify_setting(request):
         return HttpResponse()
     return HttpResponseNotAllowed(["PUT"])
 
-@csrf_exempt
 @login_required
 def add_visited(request, cityname):
     # / POST
@@ -83,7 +77,6 @@ def add_visited(request, cityname):
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
 
-@csrf_exempt
 @login_required
 def visited_cities(request, username):
     if (request.method == 'GET'):
@@ -95,7 +88,6 @@ def visited_cities(request, username):
         return JsonResponse({"cities": result})
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def upload(request, cityname):
     # image file / POST
@@ -110,7 +102,6 @@ def upload(request, cityname):
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
 
-@csrf_exempt
 @login_required
 def pictures_of_city(request, username, cityname):
     if (request.method == 'GET') :
@@ -135,7 +126,6 @@ def pictures_of_city(request, username, cityname):
 
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def get_picture(request, picture_id):
     if (request.method == 'GET') :
@@ -152,7 +142,6 @@ def get_picture(request, picture_id):
         })
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def comments_of_picture(request, picture_id):
     if (request.method == 'GET'):
@@ -171,7 +160,6 @@ def comments_of_picture(request, picture_id):
 
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def get_traveller(request, username):
     if (request.method == 'GET'):
@@ -184,7 +172,6 @@ def get_traveller(request, username):
         })
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def update_followings(request, username):
     user = request.user
@@ -206,7 +193,6 @@ def update_followings(request, username):
 
     return HttpResponseNotAllowed(["POST", "DELETE"])
 
-@csrf_exempt
 @login_required
 def messages_received(request):
     if request.method == 'GET':
@@ -222,7 +208,6 @@ def messages_received(request):
         return JsonResponse({"messages": data})
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def followers(request, username):
     if request.method == 'GET':
@@ -233,7 +218,6 @@ def followers(request, username):
         return JsonResponse({"followers": follower_list})
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def followings(request, username):
     if request.method == 'GET':
@@ -244,7 +228,6 @@ def followings(request, username):
         return JsonResponse({"followings": following_list})
     return HttpResponseNotAllowed(["GET"])
 
-@csrf_exempt
 @login_required
 def dashboard(request):
     if request.method == "GET":
