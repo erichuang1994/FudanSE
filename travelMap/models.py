@@ -18,7 +18,7 @@ class Picture(models.Model):
     time = models.DateTimeField("Picture's upload time")
     traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
-    pic_file = models.ImageField(upload_to="pictures")
+    pic_file = models.ImageField()
 
 class Message(models.Model):
     content = models.CharField("Message's content", max_length=1000)

@@ -2,6 +2,7 @@
 __pycache__
 
 /db.sqlite3
+/media
 /travelMap/migrations/*_initial.py
 /travelMap/migrations/*_auto_*.py
 
