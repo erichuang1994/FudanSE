@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.contrib.auth.models import User, UserManager
 
@@ -24,4 +25,11 @@ class Message(models.Model):
     time = models.DateTimeField("Message send time")
     traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
+
+class TravellerForm(forms.Form):
+    email = forms.EmailField()
+
+class PictureForm(forms.Form):
+    description = forms.CharField(max_length=1000)
+    picture = forms.ImageField()
 

@@ -20,11 +20,16 @@ def getOnlyElement(a):
 def signup(request):
     # username, password, email
     if (request.method == 'POST'):
-        username = request.POST['username']
-        password = request.POST['password']
-        email = request.POST['email']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username == None or password == None:
+            return HttpResponseBadRequest("Invalid parameters!")
+        form = TravellerForm({'email': request.POST.get('email')})
+        if not form.is_valid():
+            return HttpResponseBadRequest("Invalid email address!")
+        email = form.cleaned_data['email']
+
         if (User.objects.filter(username=username).count() > 0):
-            print(User.objects.filter(username=username))
             return HttpResponseBadRequest('Username already exist!')
         user = User.objects.create_user(username=username, password=password, email=email)
         Traveller.objects.create(user=user)
@@ -35,8 +40,10 @@ def signup(request):
 def login(request):
     # username, password
     if (request.method == 'POST') :
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username == None or password == None:
+            return HttpResponseBadRequest("Invalid parameters!")
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
@@ -60,7 +67,11 @@ def modify_setting(request):
         if "password" in data:
             user.set_password(data['password'])
         if "email" in data:
-            user.email = data["email"]
+            form = TravellerForm(data)
+            if form.is_valid():
+                user.email = form.cleaned_data["email"]
+            else:
+                return HttpResponseBadRequest("Invalid email address!")
         user.save()
         return HttpResponse()
     return HttpResponseNotAllowed(["PUT"])
@@ -93,12 +104,14 @@ def upload(request, cityname):
     # image file / POST
     if (request.method == 'POST') :
         traveller = getOnlyElement(Traveller.objects.filter(user=request.user))
-        description = request.POST['description']
         city = getOnlyElement(City.objects.filter(name=cityname))
         if (city is None) :
             return HttpResponseNotFound("No Such City!")
-        picture = Picture.objects.create(description=description, like_count=0, time=timezone.now(), traveller=traveller, city=city, pic_file=request.FILES['picture'])
-        print(picture.id)
+        form = PictureForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return HttpResponseBadRequest("Bad request!")
+        description = form.cleaned_data['description']
+        picture = Picture.objects.create(description=description, like_count=0, time=timezone.now(), traveller=traveller, city=city, pic_file=form.cleaned_data['picture'])
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
 
