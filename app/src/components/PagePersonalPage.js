@@ -4,11 +4,12 @@ import Map from './Map';
 
 var PagePersonalPage = React.createClass({
 	getInitialState:function(){
-		return {};
+		return {isLoaded:false};
 	},
-	componentWillMount:function() {
+	componentDidMount:function() {
 		var username = localStorage.username;
 		var setState = this.setState.bind(this);
+		var self = this;
 		fetch("/api/travellers/" + username+"/cities", {
 			credentials: 'include',
 			method: 'get'
@@ -20,33 +21,23 @@ var PagePersonalPage = React.createClass({
 			alert("获取信息失败");
 		}}).then(function(json){
 			console.log(json);
-			// setState({email:json.email});
-		});
-		fetch("/api/travellers/"+ username+ "/followings", {
-			credentials: 'include',
-			method: 'get'
-		})
-		.then(function(res){
-		if(res.status === 200){
-			return res.json();
-		}else if(res.status === 500){
-			alert("获取信息失败");
-		}}).then(function(json){
-			console.log(json);
-			// setState({email:json.email});
+			self.cities = json.cities;
+			setState({isLoaded:true});
 		});
 	},
 	render : function() {
-		return (
-		<div>
-			{
-				//	add personal info here
-			}
-			{/*<div>个人信息，名字，图片，粉丝数</div>*/}
-			{/*<News data={this.props.data} />*/}
-			<Map />
-		</div>
-		);
+		console.log(this.cities);
+		if(this.state.isLoaded){
+			return (
+			<div>
+				<Map cities={this.cities}/>
+			</div>
+			);
+		}else{
+			return (
+			<div></div>
+			);
+		}
 	}
 });
 

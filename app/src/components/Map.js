@@ -46,7 +46,7 @@ var Map = React.createClass({
 		this.width = "600";
     return { focusCity: "" };
   },
-	
+
 	updateFocusCity:function(name){
 		// fetch("/travellers/USERNAME/cities/CITYNAME/pictures", {
 		// 	credentials: 'include',
@@ -69,13 +69,17 @@ var Map = React.createClass({
 				position: 'fixed',
 				backgroundColor:'rgba(0, 0, 0, 0.498039)'
 			};
+		var markers = this.props.cities.map(function(ele){
+			return MarkerData(ele[0],...ele[1]);
+		});
+		console.log(markers);
 		return (
-			<div>		
+			<div>
 				<div>
 					<MapWithMarker
 						zoom={5}
 						mapCenter={{ lat: 26.08, lng: 119.3 }}
-						marker={[MarkerData('上海', 31.2304, 121.4737), MarkerData('香港', 22.2, 114.1), MarkerData('扬州', 32.39, 119.42)]}
+						marker={markers}
 						containerElement={
 							<div style={{ height: this.height+'px', width: this.width+'px', maxWidth: '100%'}} />
 						}
