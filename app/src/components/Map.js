@@ -70,7 +70,7 @@ var Map = React.createClass({
 				backgroundColor:'rgba(0, 0, 0, 0.498039)'
 			};
 		var markers = this.props.cities.map(function(ele){
-			return MarkerData(ele[0],...ele[1]);
+			return MarkerData(ele.name, parseFloat(ele.latitude), parseFloat(ele.longitude));
 		});
 		console.log(markers);
 		return (
