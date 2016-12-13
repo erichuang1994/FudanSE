@@ -107,7 +107,7 @@ var Addpic = React.createClass( {
     })
     .then(function(res){
     if(res.status === 200){
-      alert("添加城市成功");
+      // alert("添加城市成功");
       //this.setState({addCity:false});
     }else if(res.status === 401){
       alert("添加城市不成功");
@@ -122,7 +122,7 @@ var Addpic = React.createClass( {
     this.handleAddCity();
     data.append("description","");
     data.append("picture",imgsrc);
-    //console.log(imgsrc);
+    console.log(imgsrc);
     fetch("/api/user/cities/" + city + "/pictures", {
       credentials: 'include',
       method: 'post',
