@@ -30,6 +30,6 @@ class TravellerForm(forms.Form):
     email = forms.EmailField()
 
 class PictureForm(forms.Form):
-    description = forms.CharField(max_length=1000)
+    description = forms.CharField(required=False, max_length=1000)
     picture = forms.ImageField()
 

@@ -61,7 +61,7 @@ Prefix: /api
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |
 | Add visited city | POST | /user/cities/CITYNAME | | |
-| Upload picture | POST | /user/cities/CITYNAME/pictures | description, picture(binary file) | |
+| Upload picture | POST | /user/cities/CITYNAME/pictures | description(optional), picture(binary file) | |
 | Recent pictures of followings | GET | /user/dashboard | | [pictures] |
 | Follow people | POST | /user/followings/USERNAME | | |
 | Unfollow people | DELETE | /user/followings/USERNAME | | |
