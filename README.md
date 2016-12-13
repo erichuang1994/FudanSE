@@ -56,7 +56,7 @@ Prefix: /api
 | Create comment | POST | /pictures/PICTUREID/messages | content | |
 | Create traveller | POST | /travellers | username, password, email | |
 | Get traveller | GET | /travellers/USERNAME | | username, email |
-| List of visited cities | GET | /travellers/USERNAME/cities | | [cityname] |
+| List of visited cities | GET | /travellers/USERNAME/cities | | [cities] |
 | Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |

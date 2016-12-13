@@ -95,7 +95,13 @@ def visited_cities(request, username):
         if (user is None):
             return HttpResponseNotFound("No Such User!")
         traveller = getOnlyElement(Traveller.objects.filter(user=user))
-        result = [city.name for city in traveller.cities.all()]
+        result = []
+        for city in traveller.cities.all():
+            result.append({
+                "name": city.name,
+                "latitude": city.latitude,
+                "longitude": city.longitude
+            })
         return JsonResponse({"cities": result})
     return HttpResponseNotAllowed(["GET"])
 
