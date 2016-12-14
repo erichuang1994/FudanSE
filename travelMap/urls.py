@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^user/dashboard$', apiHandlers.dashboard),
     url(r'^user/followings/(?P<username>[0-9A-Za-z]+)$', apiHandlers.update_followings),
     url(r'^user/messages$', apiHandlers.messages_received),
+    url(r'^user/pictures/(?P<picture_id>[0-9]+)$', apiHandlers.like_picture),
     url(r'^user/settings$', apiHandlers.modify_setting),
 ]

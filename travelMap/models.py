@@ -14,7 +14,6 @@ class Traveller(models.Model):
 
 class Picture(models.Model):
     description = models.CharField("Picture's description", max_length=1000)
-    like_count = models.IntegerField("Number of likes")
     time = models.DateTimeField("Picture's upload time")
     traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
@@ -26,10 +25,19 @@ class Message(models.Model):
     traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
 
+class Like(models.Model):
+    traveller = models.ForeignKey(Traveller, on_delete=models.CASCADE)
+    picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ["traveller", "picture"]
+
 class TravellerForm(forms.Form):
     email = forms.EmailField()
 
 class PictureForm(forms.Form):
     description = forms.CharField(required=False, max_length=1000)
     picture = forms.ImageField()
+
+class LikeForm(forms.Form):
+    like = forms.BooleanField(required=False)
 

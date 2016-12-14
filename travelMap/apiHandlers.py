@@ -117,7 +117,7 @@ def upload(request, cityname):
         if not form.is_valid():
             return HttpResponseBadRequest("Bad request!")
         description = form.cleaned_data['description']
-        picture = Picture.objects.create(description=description, like_count=0, time=timezone.now(), traveller=traveller, city=city, pic_file=form.cleaned_data['picture'])
+        picture = Picture.objects.create(description=description, time=timezone.now(), traveller=traveller, city=city, pic_file=form.cleaned_data['picture'])
         return HttpResponse()
     return HttpResponseNotAllowed(["POST"])
 
@@ -137,7 +137,7 @@ def pictures_of_city(request, username, cityname):
             data.append({
                 "id": p.id,
                 "description": p.description,
-                "like_count": p.like_count,
+                "like_count": p.like_set.count(),
                 "time": p.time,
                 "url": p.pic_file.url
             })
@@ -155,7 +155,7 @@ def get_picture(request, picture_id):
             "username": picture.traveller.user.username,
             "cityname": picture.city.name,
             "description": picture.description,
-            "like_count": picture.like_count,
+            "like_count": picture.like_set.count(),
             "time": picture.time,
             "url": picture.pic_file.url
         })
@@ -262,11 +262,32 @@ def dashboard(request):
                 "username": p.traveller.user.username,
                 "cityname": p.city.name,
                 "description": p.description,
-                "like_count": p.like_count,
+                "like_count": p.like_set.count(),
                 "time": p.time,
                 "url": p.pic_file.url
             })
         return JsonResponse({"pictures": data})
 
     return HttpResponseNotAllowed(["GET"])
+
+@login_required
+def like_picture(request, picture_id):
+    if request.method == "GET":
+        like = len(Like.objects.filter(picture__id=picture_id, traveller__user=request.user)) > 0
+        return JsonResponse({"like": like})
+    elif request.method == "POST":
+        form = LikeForm(request.POST)
+        if not form.is_valid():
+            return HttpResponseBadRequest("Bad request!")
+        picture = getOnlyElement(Picture.objects.filter(id=picture_id))
+        if picture == None:
+            return HttpResponseBadRequest("No such picture!")
+        traveller = Traveller.objects.get(user=request.user)
+        if form.cleaned_data["like"]:
+            Like.objects.get_or_create(picture=picture, traveller=traveller)
+        else:
+            Like.objects.filter(picture=picture, traveller=traveller).delete()
+        return HttpResponse()
+
+    return HttpResponseNotAllowed(["GET", "POST"])
 
