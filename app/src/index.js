@@ -46,7 +46,6 @@ ReactDOM.render(
       <Route path="/login" component={()=><Login loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/signup" component={()=><Signup loginfunc={login} signupfunc={signup}/>}/>
       <Route path="/addpic" component={Addpic} onEnter={requireAuth}/>
-      <Route path="/map" component={Map} onEnter={requireAuth}/>
       <IndexRedirect to="login"/>
       <Redirect path="*" to="login"/>
     </Route>

@@ -41,12 +41,12 @@ var Addpic = React.createClass( {
             fr.onload = function(e) {
                 var src = e.target.result;
                 //var src = fr.result;
-                
+
                 if (!validateImg(src)) {
                     alert(tip);
                     showPrvImg("");
                 } else {
-                    
+
                     showPrvImg(picname);
                     this.setCityTrue();
                 }
@@ -107,7 +107,7 @@ var Addpic = React.createClass( {
     })
     .then(function(res){
     if(res.status === 200){
-      alert("添加城市成功");
+      // alert("添加城市成功");
       //this.setState({addCity:false});
     }else if(res.status === 401){
       alert("添加城市不成功");
@@ -122,7 +122,7 @@ var Addpic = React.createClass( {
     this.handleAddCity();
     data.append("description","");
     data.append("picture",imgsrc);
-    //console.log(imgsrc);
+    console.log(imgsrc);
     fetch("/api/user/cities/" + city + "/pictures", {
       credentials: 'include',
       method: 'post',
@@ -156,7 +156,7 @@ var Addpic = React.createClass( {
                 </div>
                 */}
                 <div className="mapbox">
-                    <button className="base-button" onClick={this.roadPic}>添加照片</button>                  
+                    <button className="base-button" onClick={this.roadPic}>添加照片</button>
                 </div>
 
                 <div className="mapbox">
@@ -168,7 +168,7 @@ var Addpic = React.createClass( {
                 {this.state.addCity ? (
                     <div className="fixed-center" >
                       <input className="base-input" ref="cityname" type="text" placeholder="输入城市名"/>
-                      <Link to="/map"  className="base-button pure-button pure-button-primary" onClick={this.handleAddPic}>发布</Link>
+                      <Link to="/personal"  className="base-button pure-button pure-button-primary" onClick={this.handleAddPic}>发布</Link>
                         {/* <button  className="base-button pure-button pure-button-primary" onClick={()=>this.setState({addCity:false})}>取消</button> */}
                     </div>
                   ) :
