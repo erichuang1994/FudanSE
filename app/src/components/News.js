@@ -6,6 +6,7 @@ import '../css/News.css';
 import '../css/base.css';
 import '../css/cards.css';
 import '../css/mods.css';
+import {newsdata} from './newsdata';
 
 var NewsComment = React.createClass({
   render: function() {
@@ -14,6 +15,35 @@ var NewsComment = React.createClass({
 });
 
 var Card = React.createClass({
+  getFetch(url, callback){
+    return fetch(url, {
+      credentials: 'include',
+      method: 'get',
+    })
+    .then(function(res){
+    if(res.status === 200){
+      return res.json();
+    }else if(res.status === 500){
+      alert("获取信息失败");
+    }}).then(function(json){
+      return callback(json);
+    });
+  },
+
+  postFetch(url, data, success, fail) {
+    fetch(url, {
+      credentials: 'include',
+      method: 'post',
+      data: data
+    })
+    .then(function(res){
+    if(res.status === 200){
+      success();
+    }else {
+      fail();
+    }});
+  },
+
   getInitialState: function() {
     return {comment: false};
   },
@@ -23,12 +53,17 @@ var Card = React.createClass({
 
   clickComment: function() {
     if (!this.state.comment) {
-	  var commentData = [1];
-	  this.setState({comment: true, commentData:[1]})
+      var commentData = [];
+      this.getFetch("/api/pictures/" + this.props.data.pictureId + "/messages", (json) => {console.log(json); commentData = json;});
+      this.setState({comment: true, commentData:commentData});
 	}
-	else {
-	  this.setState({comment: false});
-	}
+    else {
+      this.setState({comment: false});
+    }
+  },
+
+  clickAddComment: function() {
+    
   },
 
   render : function() {
@@ -81,9 +116,26 @@ var Card = React.createClass({
   }
 });
 
+
+
+
+
 var News = React.createClass({
   getInitialState:function() {
-    return { edit: false, curNum:0 };
+    return { loading:true, edit:false, curNum:0, data:[]};
+  },
+
+  getNewsData: function() {
+    return fetch("/api/user/dashboard", {
+     credentials: 'include',
+      method: 'get'
+    })
+    .then(function(res){
+      if(res.status === 200){
+        return res.json();
+      }else if(res.status === 500){
+       alert("获取信息失败");
+      }});
   },
 
 	editfunc:function(num){
@@ -91,8 +143,9 @@ var News = React.createClass({
 	},
 
 	deleteById:function(){
-		this.props.deleteById(this.state.curNum);
-		this.setState({edit:false});
+		var data = this.state.data;
+		data.splice(this.state.curNum, 1);
+		this.setState({edit:false, data:data});
 	},
 
 	cancelEditfunc:function(num){
@@ -100,6 +153,9 @@ var News = React.createClass({
 	},
 
 	render:function(){
+		if (this.state.loading) {
+			this.getNewsData().then().then((json) => {console.log(newsdata); console.log(json.pictures); this.setState({data:json.pictures, loading:false})});
+		}
 		this.commentBox = [];
 		if(this.state.edit){
 			var style1={
@@ -128,7 +184,7 @@ var News = React.createClass({
 		return (
 		<div>
 			{
-				this.props.data.map((card, index) => {
+				this.state.data.map((card, index) => {
 					return (
 						<Card key={index} data={card} index={index} editfunc={() => {this.editfunc(index)}}/>
 					);
