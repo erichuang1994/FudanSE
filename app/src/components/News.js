@@ -15,7 +15,7 @@ var NewsComment = React.createClass({
 });
 
 var Card = React.createClass({
-  getFetch(url, callback){
+  getFetch(url){
     return fetch(url, {
       credentials: 'include',
       method: 'get',
@@ -25,16 +25,14 @@ var Card = React.createClass({
       return res.json();
     }else if(res.status === 500){
       alert("获取信息失败");
-    }}).then(function(json){
-      return callback(json);
-    });
+    }});
   },
 
   postFetch(url, data, success, fail) {
     fetch(url, {
       credentials: 'include',
       method: 'post',
-      data: data
+      body: data
     })
     .then(function(res){
     if(res.status === 200){
@@ -45,10 +43,24 @@ var Card = React.createClass({
   },
 
   getInitialState: function() {
-    return {comment: false};
+    return {comment: false, likeI: false, likeCount:this.props.data.likeCount};
+  },
+
+  componentWillMount: function() {
+    this.getFetch("/api/user/pictures/" + this.props.data.pictureId).then((json) => {this.setState({likeI:json.like})});
   },
 
   clickLike: function() {
+    console.log(".");
+    var data = new FormData();
+    data.append("like", !this.state.likeI);
+    this.postFetch("/api/user/pictures/" + this.props.data.pictureId, data, () => {
+      var newCount = this.state.likeCount;
+      if (this.state.likeI) newCount -= 1; else newCount += 1;
+      this.getFetch("/api/user/pictures/" + this.props.data.pictureId).then((json) => {
+        this.setState({likeI:json.like, likeCount:newCount});
+      });
+    }, () => {alert("error.");});
   },
 
   clickComment: function() {
@@ -82,8 +94,8 @@ var Card = React.createClass({
 	  <div key={this.props.index} className="card card9 line-around" >
 	    <header className="layout-box media-graphic">
           <div className="mod-media size-xs news-header">
-            <a href={this.props.userlink}>
-              <img className="size-xs" alt={card.pictureUrl} src={card.userPhoto}/>
+            <a href={card.userlink}>
+              <img className="size-xs" alt={" "} src={card.userPhoto}/>
             </a>
           </div>
           <div className="box-col item-list">
@@ -101,12 +113,12 @@ var Card = React.createClass({
         <ul className="news-toolbar">
           <li className="news-tool">
             <a href="javascript:;" onClick={this.clickLike}>
-              0赞
+              {this.state.likeCount}赞
             </a>
           </li>
           <li className="news-tool">
             <a href="javascript:;" onClick={this.clickComment}>
-              0评论
+              评论
             </a>
           </li>
         </ul>
@@ -137,23 +149,25 @@ var News = React.createClass({
       }});
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     this.getNewsData().then().then((json) => {
 	  var data = json.pictures.map((data) => {
 	    return {
           date: new Date(Date.parse(data.time)),
           location: data.cityname,
-          //	TODO check the pictureUrl
-          pictureUrl: "api/" + data.url.substring(7),
-          //	userLink is not usable
+          pictureId: data.pic_id,
+          pictureUrl: data.url.substring(0),
+          //	userLink is not usable --> profile
           userLink: "",
           userName: data.username,
-          //	UserPhoto is not usable
-          userPhoto: ""
+          //	UserPhoto is not usable --> no
+          userPhoto: "",
+          likeCount: data.like_count
         }
       });
-	  console.log(newsdata);
+	  //	console.log(newsdata);
       console.log(data);
+      console.log(json);
 	  this.setState({data:data});
 	});
   },
