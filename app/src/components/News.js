@@ -63,7 +63,6 @@ var Card = React.createClass({
   },
 
   clickAddComment: function() {
-    
   },
 
   render : function() {
@@ -122,7 +121,7 @@ var Card = React.createClass({
 
 var News = React.createClass({
   getInitialState:function() {
-    return { loading:true, edit:false, curNum:0, data:[]};
+    return { edit:false, curNum:0, data:[]};
   },
 
   getNewsData: function() {
@@ -136,6 +135,27 @@ var News = React.createClass({
       }else if(res.status === 500){
        alert("获取信息失败");
       }});
+  },
+
+  componentDidMount: function() {
+    this.getNewsData().then().then((json) => {
+	  var data = json.pictures.map((data) => {
+	    return {
+          date: new Date(Date.parse(data.time)),
+          location: data.cityname,
+          //	TODO check the pictureUrl
+          pictureUrl: "api/" + data.url.substring(7),
+          //	userLink is not usable
+          userLink: "",
+          userName: data.username,
+          //	UserPhoto is not usable
+          userPhoto: ""
+        }
+      });
+	  console.log(newsdata);
+      console.log(data);
+	  this.setState({data:data});
+	});
   },
 
 	editfunc:function(num){
@@ -153,9 +173,6 @@ var News = React.createClass({
 	},
 
 	render:function(){
-		if (this.state.loading) {
-			this.getNewsData().then().then((json) => {console.log(newsdata); console.log(json.pictures); this.setState({data:json.pictures, loading:false})});
-		}
 		this.commentBox = [];
 		if(this.state.edit){
 			var style1={
