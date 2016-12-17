@@ -45,13 +45,14 @@
   * List
 
 ## API
+URL of Images: /images/FILENAME
+
 Prefix: /api
 
 | Description | HTTP Method | Endpoint | Parameters  | Response |
 | --- | --- | --- | --- | --- |
 | Login | POST | /login | username, password | |
 | Logout | POST | /logout | | |
-| Download image | GET | /images/FILENAME | | image |
 | Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
 | Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
 | Create comment | POST | /pictures/PICTUREID/messages | content | |

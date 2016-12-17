@@ -24,10 +24,3 @@ if __name__ == "__main__":
     city1, city2 = cities[0:2]
     traveller2.cities.add(city1, city2)
 
-    picture1 = Picture.objects.create(description="abc", time=timezone.now(), traveller=traveller2, city=city1, pic_file="images/beijing1.jpg")
-    picture2 = Picture.objects.create(description="bbb", time=timezone.now(), traveller=traveller2, city=city2, pic_file="images/beijing2.jpg")
-
-    like1 = Like.objects.create(traveller=traveller1, picture=picture1)
-
-    message1 = Message.objects.create(content="Hello!", time=timezone.now(), traveller=traveller2, picture=picture1)
-
