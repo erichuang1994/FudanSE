@@ -133,7 +133,8 @@ def pictures_of_city(request, username, cityname):
             return HttpResponseNotFound("No such visited city of the user!") 
 
         data = []
-        for p in Picture.objects.filter(traveller=traveller, city=city):
+        picture_list = Picture.objects.filter(traveller=traveller, city=city)
+        for p in sorted(picture_list, key=lambda p: p.time, reverse=True):
             data.append({
                 "id": p.id,
                 "description": p.description,
@@ -169,7 +170,8 @@ def comments_of_picture(request, picture_id):
             return HttpResponseNotFound("No Such Picture!")
 
         data = []
-        for m in Message.objects.filter(picture=picture):
+        message_list = Message.objects.filter(picture=picture)
+        for m in sorted(message_list, key=lambda m: m.time, reverse=True):
             data.append({
                 "content": m.content,
                 "time": m.time,
@@ -177,7 +179,11 @@ def comments_of_picture(request, picture_id):
             })
         return JsonResponse({"messages": data})
 
-    return HttpResponseNotAllowed(["GET"])
+    if request.method == 'POST':
+        # TODO
+        return HttpResponse()
+
+    return HttpResponseNotAllowed(["GET", "POST"])
 
 @login_required
 def get_traveller(request, username):
@@ -215,9 +221,9 @@ def update_followings(request, username):
 @login_required
 def messages_received(request):
     if request.method == 'GET':
-        message_list = Message.objects.filter(picture__traveller__user=request.user)
         data = []
-        for m in message_list:
+        message_list = Message.objects.filter(picture__traveller__user=request.user)
+        for m in sorted(message_list, key=lambda m: m.time, reverse=True):
             data.append({
                 "content": m.content,
                 "time": m.time,
@@ -257,13 +263,14 @@ def dashboard(request):
             picture_list += Picture.objects.filter(traveller=following)
 
         data = []
-        for p in picture_list:
+        for p in sorted(picture_list, key=lambda p: p.time, reverse=True):
             data.append({
                 "username": p.traveller.user.username,
                 "cityname": p.city.name,
                 "description": p.description,
                 "like_count": p.like_set.count(),
                 "time": p.time,
+                "pic_id": p.id,
                 "url": p.pic_file.url
             })
         return JsonResponse({"pictures": data})

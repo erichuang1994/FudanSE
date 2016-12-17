@@ -54,20 +54,20 @@ Prefix: /api
 | Login | POST | /login | username, password | |
 | Logout | POST | /logout | | |
 | Information of the picture | GET | /pictures/PICTUREID | | username, cityname, description, like\_count, time, url |
-| Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments] |
+| Comments of the picture | GET | /pictures/PICTUREID/messages | | [comments(descending time)] |
 | Create comment | POST | /pictures/PICTUREID/messages | content | |
 | Create traveller | POST | /travellers | username, password, email | |
 | Get traveller | GET | /travellers/USERNAME | | username, email |
 | List of visited cities | GET | /travellers/USERNAME/cities | | [cities] |
-| Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures] |
+| Pictures of the city | GET | /travellers/USERNAME/cities/CITYNAME/pictures | | [pictures(descending time)] |
 | List of followers | GET | /travellers/USERNAME/followers | | [username] |
 | List of followings | GET | /travellers/USERNAME/followings | | [username] |
 | Add visited city | POST | /user/cities/CITYNAME | | |
 | Upload picture | POST | /user/cities/CITYNAME/pictures | description(optional), picture(binary file) | |
-| Recent pictures of followings | GET | /user/dashboard | | [pictures] |
+| Recent pictures of followings | GET | /user/dashboard | | [pictures(descending time)] |
 | Follow people | POST | /user/followings/USERNAME | | |
 | Unfollow people | DELETE | /user/followings/USERNAME | | |
-| List of comments received | GET | /user/messages | | [comments] |
+| List of comments received | GET | /user/messages | | [comments(descending time)] |
 | Wheather user likes the picture | GET | /user/pictures/PICTUREID | | like |
 | Like or dislike the picture | POST | /user/pictures/PICTUREID | like(boolean) | |
 | Update traveller | PUT | /user/settings | password, email | |
