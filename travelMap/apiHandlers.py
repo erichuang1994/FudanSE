@@ -180,7 +180,16 @@ def comments_of_picture(request, picture_id):
         return JsonResponse({"messages": data})
 
     if request.method == 'POST':
-        # TODO
+        picture = getOnlyElement(Picture.objects.filter(id=picture_id))
+        if (picture is None) :
+            return HttpResponseNotFound("No Such Picture!")
+
+        content = request.POST.get("content")
+        if content == None:
+            return HttpResponseBadRequest("Bad request!")
+
+        traveller = Traveller.objects.get(user=request.user)
+        Message.objects.create(picture=picture, traveller=traveller, content=content, time=timezone.now())
         return HttpResponse()
 
     return HttpResponseNotAllowed(["GET", "POST"])
