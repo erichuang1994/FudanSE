@@ -64,10 +64,14 @@ var Card = React.createClass({
   },
 
   clickComment: function() {
+    console.log("hello word");
     if (!this.state.comment) {
-      var commentData = [];
-      this.getFetch("/api/pictures/" + this.props.data.pictureId + "/messages", (json) => {console.log(json); commentData = json;});
-      this.setState({comment: true, commentData:commentData});
+      this.getFetch("/api/pictures/" + this.props.data.pictureId + "/messages").then((json) => {
+        var commentData = [];
+        var messages = json.messages;
+        console.log(messages);
+        this.setState({comment: true, commentData:commentData});
+      });
 	}
     else {
       this.setState({comment: false});
@@ -75,6 +79,12 @@ var Card = React.createClass({
   },
 
   clickAddComment: function() {
+    var comment = this.refs.commentInput.value;
+    var data = new FormData();
+    data.append("content", comment);
+    this.postFetch("/api/pictures/" + this.props.data.pictureId + "/messages", data, () => {
+      alert("success");
+    }, () => {});
   },
 
   render : function() {
@@ -82,11 +92,17 @@ var Card = React.createClass({
 	if (this.state.comment) {
 	  var commentBox = (
         <div className='comment-box'>
-		  {
-  		    this.state.commentData.map((data, index) => {
-		      return (<NewsComment key={index} data={data} />);
-		    })
-		  }
+          <div>
+            <textarea style={{overflow: "hidden", float: "left", width:"67%", height:"23px"}} ref="commentInput"/>
+            <button class="base-button" style={{marginLeft: "1%", width:"30%"}} onClick={this.clickAddComment}>评论</button>
+          </div>
+          <div>
+            {
+  		      this.state.commentData.map((data, index) => {
+		        return (<NewsComment key={index} data={data} />);
+  		      })
+		    }
+          </div>
         </div>
 	  );
 	}
