@@ -11,7 +11,7 @@ import {newsdata} from './newsdata';
 var NewsComment = React.createClass({
   render: function() {
     return (
-      <div>
+      <div style={{padding: "2px 1px 0px", fontSize: "80%"}}>
         <a href="" style={{color: "#d14b04", float: "left"}}>{this.props.data.traveller}</a>
         <p>{" : " + this.props.data.content}</p>
         <span className="time">{new Date(Date.parse(this.props.data.time)).toLocaleDateString("ch-CN")}</span>
@@ -85,8 +85,8 @@ var Card = React.createClass({
     var data = new FormData();
     data.append("content", comment);
     this.postFetch("/api/pictures/" + this.props.data.pictureId + "/messages", data, () => {
-      alert("success");
-    }, () => {});
+      alert("评论成功了");
+    }, () => {alert("error")});
   },
 
   render : function() {
@@ -117,8 +117,8 @@ var Card = React.createClass({
             </a>
           </div>
           <div className="box-col item-list">
-            <a className="item-main txt-l mct-a txt-cut"><span style={{fontWeight: "bold"}}>{card.userName}</span></a>
-            <div className="item-minor txt-xxs mct-d txt-cut">
+            <a className="item-main txt-l mct-a txt-cut"><span style={{fontWeight: "bold", fontSize:"110%"}}>{card.userName}</span></a>
+            <div className="item-minor txt-xxs mct-d txt-cut" style={{fontSize: "85%"}}>
               <span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
               <span className="from">来自{card.location}</span>
             </div>
@@ -228,7 +228,7 @@ var News = React.createClass({
 			)
 		};
 		return (
-		<div>
+		<div style={{fontSize: "16px"}}>
 			{
 				this.state.data.map((card, index) => {
 					return (
