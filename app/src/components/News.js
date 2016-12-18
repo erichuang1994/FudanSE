@@ -10,7 +10,12 @@ import {newsdata} from './newsdata';
 
 var NewsComment = React.createClass({
   render: function() {
-    return (<div>1</div>);
+    return (
+      <div>
+        <a href="" style={{color: "#d14b04", float: "left"}}>{this.props.data.traveller}</a>
+        <p>{" : " + this.props.data.content}</p>
+        <span className="time">{new Date(Date.parse(this.props.data.time)).toLocaleDateString("ch-CN")}</span>
+      </div>);
   }
 });
 
@@ -51,7 +56,6 @@ var Card = React.createClass({
   },
 
   clickLike: function() {
-    console.log(".");
     var data = new FormData();
     data.append("like", !this.state.likeI);
     this.postFetch("/api/user/pictures/" + this.props.data.pictureId, data, () => {
@@ -64,13 +68,11 @@ var Card = React.createClass({
   },
 
   clickComment: function() {
-    console.log("hello word");
     if (!this.state.comment) {
       this.getFetch("/api/pictures/" + this.props.data.pictureId + "/messages").then((json) => {
         var commentData = [];
         var messages = json.messages;
-        console.log(messages);
-        this.setState({comment: true, commentData:commentData});
+        this.setState({comment: true, commentData:messages});
       });
 	}
     else {
@@ -91,10 +93,10 @@ var Card = React.createClass({
     var card = this.props.data;
 	if (this.state.comment) {
 	  var commentBox = (
-        <div className='comment-box'>
+        <div className='comment-box' style={{padding: "3px", backgroundColor: "#ccc"}}>
           <div>
             <textarea style={{overflow: "hidden", float: "left", width:"67%", height:"23px"}} ref="commentInput"/>
-            <button class="base-button" style={{marginLeft: "1%", width:"30%"}} onClick={this.clickAddComment}>评论</button>
+            <button style={{marginLeft: "1%", width:"30%"}} onClick={this.clickAddComment}>评论</button>
           </div>
           <div>
             {
@@ -115,7 +117,7 @@ var Card = React.createClass({
             </a>
           </div>
           <div className="box-col item-list">
-            <a className="item-main txt-l mct-a txt-cut"><span>{card.userName}</span></a>
+            <a className="item-main txt-l mct-a txt-cut"><span style={{fontWeight: "bold"}}>{card.userName}</span></a>
             <div className="item-minor txt-xxs mct-d txt-cut">
               <span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
               <span className="from">来自{card.location}</span>
@@ -181,9 +183,6 @@ var News = React.createClass({
           likeCount: data.like_count
         }
       });
-	  //	console.log(newsdata);
-      console.log(data);
-      console.log(json);
 	  this.setState({data:data});
 	});
   },
