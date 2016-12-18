@@ -21,3 +21,15 @@
   float: left;
   text-align: center;
 }
+a {
+  color: "#808080";
+}
+.comment {
+  padding: 2px 1px 0px;
+  font-size: 80%;
+  border-bottom-width: 1px;
+}
+.comment-box {
+  padding: 3px;
+  background-color: #ccc;
+}

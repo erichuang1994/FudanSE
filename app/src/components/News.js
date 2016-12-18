@@ -6,12 +6,11 @@ import '../css/News.css';
 import '../css/base.css';
 import '../css/cards.css';
 import '../css/mods.css';
-import {newsdata} from './newsdata';
 
 var NewsComment = React.createClass({
   render: function() {
     return (
-      <div style={{padding: "2px 1px 0px", fontSize: "80%"}}>
+      <div className="comment">
         <a href="" style={{color: "#d14b04", float: "left"}}>{this.props.data.traveller}</a>
         <p>{" : " + this.props.data.content}</p>
         <span className="time">{new Date(Date.parse(this.props.data.time)).toLocaleDateString("ch-CN")}</span>
@@ -93,7 +92,7 @@ var Card = React.createClass({
     var card = this.props.data;
 	if (this.state.comment) {
 	  var commentBox = (
-        <div className='comment-box' style={{padding: "3px", backgroundColor: "#ccc"}}>
+        <div className='comment-box'>
           <div>
             <textarea style={{overflow: "hidden", float: "left", width:"67%", height:"23px"}} ref="commentInput"/>
             <button style={{marginLeft: "1%", width:"30%"}} onClick={this.clickAddComment}>评论</button>
@@ -120,7 +119,7 @@ var Card = React.createClass({
             <a className="item-main txt-l mct-a txt-cut"><span style={{fontWeight: "bold", fontSize:"110%"}}>{card.userName}</span></a>
             <div className="item-minor txt-xxs mct-d txt-cut" style={{fontSize: "85%"}}>
               <span className="time">{card.date.toLocaleDateString("ch-CN")}</span>
-              <span className="from">来自{card.location}</span>
+              <span className="from">来自 {card.location}</span>
             </div>
           </div>
           <a className="operate-box"><i className="icon-font icon-font-arrow-down txt-s" onClick={this.props.editfunc}></i></a>
@@ -130,7 +129,7 @@ var Card = React.createClass({
         </div>
         <ul className="news-toolbar">
           <li className="news-tool">
-            <a href="javascript:;" onClick={this.clickLike}>
+            <a href="javascript:;" onClick={this.clickLike} style={{color: (this.state.likeI? "#9f6dc7" : "#808080")}}>
               {this.state.likeCount}赞
             </a>
           </li>
@@ -228,7 +227,7 @@ var News = React.createClass({
 			)
 		};
 		return (
-		<div style={{fontSize: "16px"}}>
+		<div>
 			{
 				this.state.data.map((card, index) => {
 					return (
