@@ -97,7 +97,7 @@ var Card = React.createClass({
             <textarea style={{overflow: "hidden", float: "left", width:"67%", height:"23px"}} ref="commentInput"/>
             <button style={{marginLeft: "1%", width:"30%"}} onClick={this.clickAddComment}>评论</button>
           </div>
-          <div>
+          <div style={{marginTop: "10px"}}>
             {
   		      this.state.commentData.map((data, index) => {
 		        return (<NewsComment key={index} data={data} />);
