@@ -44,7 +44,8 @@ var Map = React.createClass({
 	getInitialState:function() {
 		this.height = "700";
 		this.width = "600";
-    return { focusCity: "" };
+		this.username = localStorage.getItem('username');
+    return { focusCity: ""};
   },
 
 	updateFocusCity:function(name){
@@ -88,12 +89,8 @@ var Map = React.createClass({
 						}
 						updateFocusCity={this.updateFocusCity}
 					/>
-					{this.state.focusCity==="上海" ? (
-					<News data={shanghai} deleteById={()=>{console.log("hello world");}}></News>
-					) :
-					null}
-					{this.state.focusCity==="扬州" ? (
-					<News data={yangzhou} deleteById={()=>{console.log("hello world");}}></News>
+					{this.state.focusCity!=="" ? (
+					<News api={"/api/travellers/"+this.username+"/cities/"+this.state.focusCity+"/pictures"} deleteById={()=>{console.log("hello world");}}></News>
 					) :
 					null}
 				</div>

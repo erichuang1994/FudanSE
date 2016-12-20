@@ -154,7 +154,7 @@ var News = React.createClass({
   },
 
   getNewsData: function() {
-    return fetch("/api/user/dashboard", {
+    return fetch(this.props.api, {
      credentials: 'include',
       method: 'get'
     })

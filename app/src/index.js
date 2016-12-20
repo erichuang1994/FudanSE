@@ -36,7 +36,7 @@ function signup(){
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="/news" component={News} onEnter={requireAuth}/>
+      <Route path="/news" component={()=><News api="/api/user/dashboard"/>} onEnter={requireAuth}/>
       <Route path="/personal" component={PagePersonalPage} onEnter={requireAuth}/>
       <Route path="/setting" component={Setting} onEnter={requireAuth}/>
       <Route path="/profile" component={Profile} onEnter={requireAuth}>
