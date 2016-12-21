@@ -10,6 +10,7 @@ var Signup =React.createClass( {
 	handleSignup:function(event){
 		var data = new FormData();
 		var loginfunc=this.props.loginfunc;
+		var username = this.refs.username.value;
 		for(var key in this.refs) {
     	if(this.refs.hasOwnProperty(key)) {
 				data.append(key, this.refs[key].value);
@@ -22,6 +23,7 @@ var Signup =React.createClass( {
 		})
 		.then(function(res){
 			if(res.status === 200){
+					localStorage.setItem('username', username);
 					loginfunc();
 			}else if(res.status=== 302){
 				alert("帐号已存在");

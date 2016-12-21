@@ -52,7 +52,7 @@ var Topbar = React.createClass( {
   getInitialState: function() {
     return {isAddFriendDiag: false};
   },
-  
+
   render:function() {
     const isAddFriendDiag = this.state.isAddFriendDiag;
     if(!isAddFriendDiag){
