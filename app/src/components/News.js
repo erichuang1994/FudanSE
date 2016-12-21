@@ -175,6 +175,7 @@ var News = React.createClass({
 
   componentWillMount: function() {
     this.getNewsData().then().then((json) => {
+      console.log(json);
 	  var data = json.pictures.map((data) => {
 	    return {
           date: new Date(Date.parse(data.time)),

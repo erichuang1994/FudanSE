@@ -60,9 +60,11 @@ var Map = React.createClass({
 		// 	// handle there
 		// 	console.log(res.status);
 		// }});
+		this.setState({focusCity: ""});
 		this.height = "300";
 		this.width = "500";
 		this.setState({focusCity: name});
+		console.log(name);
 	},
 	render : function() {
 		var style1={
