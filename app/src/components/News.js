@@ -91,6 +91,7 @@ var Card = React.createClass({
     this.postFetch("/api/pictures/" + this.props.data.pictureId + "/messages", data, () => {
       console.log("评论成功了");
       this.updateComment();
+      this.refs.commentInput.value = "";
     }, () => {alert.log("error")}).bind(this);
   },
 
