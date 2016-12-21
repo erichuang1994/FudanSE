@@ -50,7 +50,7 @@ var Card = React.createClass({
     return {comment: false, likeI: false, likeCount:this.props.data.likeCount};
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.getFetch("/api/user/pictures/" + this.props.data.pictureId).then((json) => {this.setState({likeI:json.like})});
   },
 
@@ -173,7 +173,7 @@ var News = React.createClass({
       }});
   },
 
-  componentWillMount: function() {
+  componentDidMount: function() {
     this.getNewsData().then().then((json) => {
       console.log(json);
 	  var data = json.pictures.map((data) => {
