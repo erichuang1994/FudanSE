@@ -73,19 +73,25 @@ var Card = React.createClass({
         var messages = json.messages;
         this.setState({comment: true, commentData:messages});
       });
-	}
-    else {
+	}else {
       this.setState({comment: false});
     }
   },
-
+  updateComment: function() {
+    this.getFetch("/api/pictures/" + this.props.data.pictureId + "/messages").then((json) => {
+      var commentData = [];
+      var messages = json.messages;
+      this.setState({commentData:messages});
+    });
+  },
   clickAddComment: function() {
     var comment = this.refs.commentInput.value;
     var data = new FormData();
     data.append("content", comment);
     this.postFetch("/api/pictures/" + this.props.data.pictureId + "/messages", data, () => {
-      alert("评论成功了");
-    }, () => {alert("error")});
+      console.log("评论成功了");
+      this.updateComment();
+    }, () => {alert.log("error")}).bind(this);
   },
 
   render : function() {
