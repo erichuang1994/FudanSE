@@ -136,7 +136,7 @@ def pictures_of_city(request, username, cityname):
         picture_list = Picture.objects.filter(traveller=traveller, city=city)
         for p in sorted(picture_list, key=lambda p: p.time, reverse=True):
             data.append({
-                "id": p.id,
+                "pic_id": p.id,
                 "description": p.description,
                 "like_count": p.like_set.count(),
                 "time": p.time,
