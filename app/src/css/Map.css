@@ -1,0 +1,92 @@
+
+body{
+  padding:0;
+  margin:0;
+}
+
+.ale{
+position:absolute;
+background:rgba(0,0,0,0.2);;
+  height: 300px;
+  z-index : 1000;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
+
+
+}
+
+.inner {
+  position: absolute;
+}
+
+.upl {
+  background:#27ae60;
+  border:0.001;
+  color:#fff;
+  padding:10px;
+  font-size:13px;
+  display:block;
+  cursor:pointer;
+  width:20%;
+  bottom:0px;
+  float:right
+}
+
+.mapbox{
+  margin:0px;
+  float: left;
+  box-sizing:border-box;
+  height:100%;
+  /*width:50%;
+  */
+  padding:0px;
+}
+.mapbox h1{
+  text-align:center;
+  margin:30px 0;
+  font-size:30px;
+}
+.mapbox input{
+  display:block;
+  width:300px;
+  margin:20px auto;
+  padding:15px;
+  border-color:rgba(0,0,0,0.2);
+  color:#000;
+  border:1;
+}
+.mapbox input:focus,.box input:active,.box button:focus,.box button:active{
+  outline:none;
+}
+.mapbox button{
+  background: #ffc09f;
+  color: #fff;
+  border: 1px solid #fbbd9e;
+  box-shadow: none;
+  cursor: default;
+}
+.mapbox button:active{
+  background:#27ae60;
+}
+.mapbox p{
+  font-size:14px;
+  text-align:center;
+}
+.mapbox p span{
+  cursor:pointer;
+  color:#666;
+}
+
+.mapbox select{
+  display:block;
+  width:332px;
+  margin:20px auto;
+  padding:15px;
+  border-color:rgba(0,0,0,0.2);
+  color:#000;
+  border:0.2;
+}
+
+.mapbox select:focus,.box select:active{
+  outline:none;
+}

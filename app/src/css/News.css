@@ -1,0 +1,35 @@
+.size-xs {
+    width: 2.125rem;
+}
+.news-header{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.news-body{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.news-toolbar{
+  list-style: none;
+  margin-bottom: 5px;
+  overflow: hidden;
+  zoom: 1;
+}
+.news-tool{
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+a {
+  color: "#808080";
+}
+.comment {
+  padding: 2px 1px 0px;
+  font-size: 80%;
+  border-bottom-width: 1px;
+}
+.comment-box {
+  padding: 3px;
+  background-color: #ccc;
+}
